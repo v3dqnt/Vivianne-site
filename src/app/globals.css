@@ -1,26 +1,186 @@
-@import "tailwindcss";
+@import "@heroui/styles";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --canvas: #ffffff;
+  --surface-raised: #ffffff;
+  --ink: #111111;
+  --ink-strong: rgba(17, 17, 17, 0.82);
+  --body: #6b6b6b;
+  --mute: rgba(17, 17, 17, 0.4);
+  --hairline: #e8e8e8;
+  --hairline-strong: rgba(17, 17, 17, 0.38);
+  --surface-soft: rgba(17, 17, 17, 0.04);
+  --surface-subtle: rgba(17, 17, 17, 0.03);
+  --radius-brand: 28px;
+  --radius-inner: calc(var(--radius-brand) - 10px);
+  --ease-spring: cubic-bezier(0.32, 0.72, 0, 1);
+  --shadow-float: 0 1px 1px rgba(17, 17, 17, 0.02), 0 8px 24px rgba(17, 17, 17, 0.05),
+    0 24px 48px rgba(17, 17, 17, 0.06);
+  /* Sampled from the logo's ring: sky blue fading into brushed silver */
+  --logo-ring: linear-gradient(135deg, #4f8fe0 0%, #b7c2cc 55%, #e9edf0 100%);
+
+  /* Theme HeroUI's tokens to Vivianne's monochrome palette, so every
+     component renders correctly with zero per-instance overrides. */
+  --background: var(--canvas);
+  --foreground: var(--ink);
+  --surface: var(--surface-raised);
+  --surface-foreground: var(--ink);
+  --muted: var(--body);
+  --accent: var(--ink);
+  --accent-foreground: var(--canvas);
+  --default: var(--surface-soft);
+  --default-foreground: var(--ink);
+  --border: var(--hairline);
+  --radius: 10px;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-canvas: var(--canvas);
+  --color-surface-raised: var(--surface-raised);
+  --color-ink: var(--ink);
+  --color-ink-strong: var(--ink-strong);
+  --color-body: var(--body);
+  --color-mute: var(--mute);
+  --color-hairline: var(--hairline);
+  --color-hairline-strong: var(--hairline-strong);
+  --color-surface-soft: var(--surface-soft);
+  --color-surface-subtle: var(--surface-subtle);
+  --color-accent: var(--accent);
+  --font-sans: var(--font-sora);
+  --radius-brand: var(--radius-brand);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+* {
+  border-color: var(--hairline);
+}
+
+html,
+body {
+  background: var(--canvas);
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  color: var(--ink);
+  font-family: var(--font-sora), system-ui, sans-serif;
+}
+
+::selection {
+  background: var(--ink);
+  color: var(--canvas);
+}
+
+/* Liquid glass web approximation (backdrop-filter based, not Apple's native
+   material) for the floating pill nav. Labeled honestly, see Appendix C of
+   the design skill this was built from. */
+.glass-pill {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  border: 1px solid rgb(17 17 17 / 0.08);
+  background:
+    linear-gradient(135deg, rgb(255 255 255 / 0.9), rgb(255 255 255 / 0.6)),
+    rgb(255 255 255 / 0.7);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 0.9),
+    0 1px 2px rgb(17 17 17 / 0.04),
+    0 12px 32px rgb(17 17 17 / 0.1),
+    0 2px 8px rgb(17 17 17 / 0.06);
+}
+
+.glass-pill::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  background: radial-gradient(
+    circle at 18% 0%,
+    rgb(255 255 255 / 0.8),
+    transparent 45%
+  );
+  pointer-events: none;
+}
+
+@media (prefers-reduced-transparency: reduce) {
+  .glass-pill {
+    background: #ffffff;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+}
+
+/* Double-bezel nested architecture: an outer "tray" shell holding an inner
+   floating core, so cards read as machined hardware rather than flat divs. */
+.bezel-shell {
+  border-radius: var(--radius-brand);
+  background: rgb(17 17 17 / 0.03);
+  box-shadow: inset 0 0 0 1px rgb(17 17 17 / 0.05);
+  padding: 6px;
+}
+
+.bezel-core {
+  border-radius: var(--radius-inner);
+  background: var(--surface-raised);
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 0.6),
+    var(--shadow-float);
+  transition: transform 400ms var(--ease-spring), box-shadow 400ms var(--ease-spring);
+}
+
+.bezel-core:hover {
+  transform: translateY(-2px);
+}
+
+/* Button-in-button trailing icon: a distinct circular chip nested at the
+   pill's inner edge, translating diagonally on hover for kinetic tension. */
+.btn-icon-circle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.75rem;
+  height: 1.75rem;
+  border-radius: 9999px;
+  background: rgb(255 255 255 / 0.16);
+  transition: transform 350ms var(--ease-spring);
+}
+
+.group:hover .btn-icon-circle {
+  transform: translate(2px, -1px) scale(1.06);
+}
+
+.eyebrow {
+  display: inline-flex;
+  width: fit-content;
+  border-radius: 9999px;
+  padding: 0.25rem 0.75rem;
+  font-size: 10px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  background: var(--surface-soft);
+  color: var(--mute);
+}
+
+.grain {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  pointer-events: none;
+  opacity: 0.03;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(40px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-reveal] {
+    opacity: 1;
+    transform: none;
+  }
 }
