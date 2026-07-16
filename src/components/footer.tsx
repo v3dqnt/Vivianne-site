@@ -26,10 +26,6 @@ export function Footer() {
             <Link href="mailto:hello@vivianne.dev">Contact</Link>
           </div>
         </div>
-
-        <div className="mt-16 flex flex-col gap-4 border-t border-hairline pt-8 text-xs text-mute md:flex-row md:items-center md:justify-between">
-          <p>Vivianne. AI for every task on your computer.</p>
-        </div>
       </div>
     </footer>
   );

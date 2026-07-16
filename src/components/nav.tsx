@@ -16,11 +16,10 @@ export function Nav() {
 
         <div className="flex items-center gap-6">
           <span className="hidden items-center gap-6 sm:flex">
-            <Link href="/downloads">Downloads</Link>
             <Link href="/changelog">Changelog</Link>
           </span>
-          <Link href="#get-started" className={buttonVariants({ size: "sm" })}>
-            Get started
+          <Link href="/downloads" className={buttonVariants({ size: "sm" })}>
+            Download
           </Link>
         </div>
       </div>
