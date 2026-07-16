@@ -115,7 +115,7 @@ export default function ChangelogPage() {
                     <div className="bg-background shadow-[inset_0_1px_1px_rgba(255,255,255,0.15)] rounded-[calc(2rem-0.375rem)] p-5 h-full flex flex-col items-center justify-center">
                       <div className="flex justify-center items-center gap-3 mb-3">
                         <h3 className="font-medium text-base">{phase.title}</h3>
-                        <Chip size="sm" color={phase.status === 'Live' ? "default" : "default"} variant={phase.status === 'Live' ? "solid" : "flat"}>{phase.status}</Chip>
+                        <Chip size="sm" color={phase.status === 'Live' ? "default" : "default"} variant={phase.status === 'Live' ? "primary" : "soft"}>{phase.status}</Chip>
                       </div>
                       <p className="text-sm leading-relaxed text-mute">{phase.body}</p>
                     </div>
