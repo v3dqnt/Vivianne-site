@@ -21,6 +21,7 @@ export function Footer() {
           </div>
 
           <div className="flex items-center gap-6">
+            <Link href="/downloads">Downloads</Link>
             <Link href="/changelog">Changelog</Link>
             <Link href="mailto:hello@vivianne.dev">Contact</Link>
           </div>
