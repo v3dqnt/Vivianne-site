@@ -10,9 +10,22 @@ export const metadata: Metadata = {
 
 const releases = [
   {
+    id: "v1-5",
+    version: "v1.5",
+    status: "Current",
+    summary: "AI Elements across the board, a real browser for web preview and search, and OpenAI's Responses API.",
+    notes: [
+      "Sources, Plan, Sandbox, Snippet, Web Preview, Queue, Checkpoints, and Confirmations — the full AI Elements set, wired into the agent's own tools.",
+      "Web preview, web search, and web_fetch now route through a real (fingerprint-spoofed) browser process instead of an iframe or plain HTML scrape — renders sites that block embedding, and launches itself automatically the first time it's needed.",
+      "Direct OpenAI calls now speak the Responses API instead of the legacy Chat Completions endpoint, with true incremental streaming and reasoning summaries.",
+      "One-click Docker install for the sandbox tool, and a fixed cron scheduler that was silently treating every automation's local time as UTC.",
+      "A refreshed welcome screen with the real Vivianne mark, replacing the placeholder CLI command box.",
+    ],
+  },
+  {
     id: "v1",
     version: "v1.0",
-    status: "Current",
+    status: "Past release",
     summary: "Initial release: the coding agent, the memory pipeline, and the multi-provider harness.",
     notes: [
       "A single tool-use loop: propose, run, verify, with a hard step ceiling.",
@@ -48,7 +61,7 @@ export default function ChangelogPage() {
         <div className="mx-auto max-w-4xl px-6 py-24">
           <Reveal>
             <h2 className="text-2xl font-medium tracking-tight mb-8">Releases</h2>
-            <Accordion defaultExpandedKeys={["v1"]}>
+            <Accordion defaultExpandedKeys={["v1-5"]}>
               {releases.map((release) => (
                 <Accordion.Item key={release.id} id={release.id}>
                   <Accordion.Heading>

@@ -16,14 +16,14 @@ const builds = [
   {
     label: "Windows (.exe)",
     detail: "Recommended for most people. NSIS installer.",
-    href: "https://github.com/v3dqnt/Vivianne-site/releases/download/v1.0.0/Vivianne_1.0.0_x64-setup.exe",
-    size: "15 MB",
+    href: "https://github.com/v3dqnt/Vivianne-site/releases/download/v1.5.0/Vivianne_1.5.0_x64-setup.exe",
+    size: "16 MB",
   },
   {
     label: "Windows (.msi)",
     detail: "For managed or enterprise installs.",
-    href: "https://github.com/v3dqnt/Vivianne-site/releases/download/v1.0.0/Vivianne_1.0.0_x64_en-US.msi",
-    size: "18 MB",
+    href: "https://github.com/v3dqnt/Vivianne-site/releases/download/v1.5.0/Vivianne_1.5.0_x64_en-US.msi",
+    size: "20 MB",
   },
 ];
 
@@ -84,11 +84,11 @@ export default function DownloadsPage() {
           as="p"
           className="mx-auto mt-6 max-w-[46ch] text-lg leading-relaxed text-body"
         >
-          v1.0, for Windows. macOS and Linux builds are on the way.
+          v1.5, for Windows. macOS and Linux builds are on the way.
         </Reveal>
         <Reveal delay={0.1} className="mt-9 flex justify-center">
           <DownloadLink
-            href="https://github.com/v3dqnt/Vivianne-site/releases/download/v1.0.0/Vivianne_1.0.0_x64-setup.exe"
+            href="https://github.com/v3dqnt/Vivianne-site/releases/download/v1.5.0/Vivianne_1.5.0_x64-setup.exe"
             label="Download for Windows"
           />
         </Reveal>
