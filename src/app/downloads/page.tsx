@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import {
   ArrowUpRight,
   WindowsLogo,
@@ -94,11 +95,17 @@ export default function DownloadsPage() {
         </Reveal>
 
         <Reveal delay={0.14} className="mt-16">
-          <img 
-            src="/Heroshot.png" 
-            alt="Vivianne hero screenshot" 
-            className="w-full rounded-[var(--radius-inner)] border border-hairline shadow-sm"
-          />
+          <div className="p-1.5 rounded-[2rem] bg-black/5 dark:bg-white/5 ring-1 ring-black/5 dark:ring-white/10">
+            <div className="overflow-hidden rounded-[calc(2rem-0.375rem)] bg-background shadow-[inset_0_1px_1px_rgba(255,255,255,0.15)]">
+              <Image
+                src="/hero-interface.png"
+                alt="Vivianne's interface mid-task: reasoning, tool calls, and the Review panel showing real file changes"
+                width={1920}
+                height={1080}
+                className="w-full h-auto"
+              />
+            </div>
+          </div>
         </Reveal>
       </section>
 
