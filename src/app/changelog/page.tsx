@@ -10,13 +10,27 @@ export const metadata: Metadata = {
 
 const releases = [
   {
+    id: "v1-7",
+    version: "v1.7",
+    status: "Current",
+    summary: "A real persistent terminal, vision with an automatic OCR fallback, goal tracking, and a stalling bug fixed for good.",
+    notes: [
+      "Persistent terminal tools backed by the same PTY sessions the app's own terminal tabs use: open one, keep it alive across steps (an activated venv, a running dev server), type into it, read back what happened.",
+      "Real vision for images, with an automatic OCR fallback when the selected model can't take image input at all, so a text-only model still gets the content.",
+      "Goal tracking: a durable objective for a long task, separate from the moment-to-moment checklist, restated every turn so it survives compaction.",
+      "Honest partial scans (a capped search says so, instead of quietly looking exhaustive), line-numbered file reads, and a list_tools call to see exactly what's registered right now.",
+      "Fixed the bug behind every turn's chance of a 120-second stall, a 111MB read on every turn, New Chat not actually persisting, and the Review panel's diff view failing on real changes.",
+      "Gesture control moved out into its own standalone app; the dead Rust orchestrator module removed; bash and powershell always stream live output now.",
+    ],
+  },
+  {
     id: "v1-5",
     version: "v1.5",
-    status: "Current",
+    status: "Past release",
     summary: "AI Elements across the board, a real browser for web preview and search, and OpenAI's Responses API.",
     notes: [
-      "Sources, Plan, Sandbox, Snippet, Web Preview, Queue, Checkpoints, and Confirmations — the full AI Elements set, wired into the agent's own tools.",
-      "Web preview, web search, and web_fetch now route through a real (fingerprint-spoofed) browser process instead of an iframe or plain HTML scrape — renders sites that block embedding, and launches itself automatically the first time it's needed.",
+      "Sources, Plan, Sandbox, Snippet, Web Preview, Queue, Checkpoints, and Confirmations: the full AI Elements set, wired into the agent's own tools.",
+      "Web preview, web search, and web_fetch now route through a real (fingerprint-spoofed) browser process instead of an iframe or plain HTML scrape. It renders sites that block embedding, and launches itself automatically the first time it's needed.",
       "Direct OpenAI calls now speak the Responses API instead of the legacy Chat Completions endpoint, with true incremental streaming and reasoning summaries.",
       "One-click Docker install for the sandbox tool, and a fixed cron scheduler that was silently treating every automation's local time as UTC.",
       "A refreshed welcome screen with the real Vivianne mark, replacing the placeholder CLI command box.",
@@ -52,7 +66,7 @@ export default function ChangelogPage() {
           as="p"
           className="mt-4 max-w-[46ch] text-base leading-relaxed text-body"
         >
-          See what's already here, and where Vivianne is headed.
+          See what&apos;s already here, and where Vivianne is headed.
         </Reveal>
       </section>
 
@@ -61,7 +75,7 @@ export default function ChangelogPage() {
         <div className="mx-auto max-w-4xl px-6 py-24">
           <Reveal>
             <h2 className="text-2xl font-medium tracking-tight mb-8">Releases</h2>
-            <Accordion defaultExpandedKeys={["v1-5"]}>
+            <Accordion defaultExpandedKeys={["v1-7"]}>
               {releases.map((release) => (
                 <Accordion.Item key={release.id} id={release.id}>
                   <Accordion.Heading>
