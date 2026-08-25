@@ -15,6 +15,7 @@ const releases = [
     status: "Current",
     summary: "A real persistent terminal, vision with an automatic OCR fallback, goal tracking, and a stalling bug fixed for good.",
     notes: [
+      "A full performance pass, front to back: the panel resize drag, diff rendering, and message list no longer do unnecessary work on a long thread; the provider request context is no longer deep-cloned repeatedly on retries; token-budget checks no longer re-walk the whole transcript every turn; and the app now shuts down cleanly instead of leaving terminals, dev servers, and local models running as orphaned processes.",
       "Persistent terminal tools backed by the same PTY sessions the app's own terminal tabs use: open one, keep it alive across steps (an activated venv, a running dev server), type into it, read back what happened.",
       "Real vision for images, with an automatic OCR fallback when the selected model can't take image input at all, so a text-only model still gets the content.",
       "Goal tracking: a durable objective for a long task, separate from the moment-to-moment checklist, restated every turn so it survives compaction.",

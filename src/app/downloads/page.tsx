@@ -17,14 +17,14 @@ const builds = [
   {
     label: "Windows (.exe)",
     detail: "Recommended for most people. NSIS installer.",
-    href: "https://github.com/v3dqnt/Vivianne-site/releases/download/v1.7.0/Vivianne_1.7.0_x64-setup.exe",
-    size: "20 MB",
+    href: "https://github.com/v3dqnt/Vivianne-site/releases/download/v1.7.2/Vivianne_1.7.2_x64-setup.exe",
+    size: "19 MB",
   },
   {
     label: "Windows (.msi)",
     detail: "For managed or enterprise installs.",
-    href: "https://github.com/v3dqnt/Vivianne-site/releases/download/v1.7.0/Vivianne_1.7.0_x64_en-US.msi",
-    size: "26 MB",
+    href: "https://github.com/v3dqnt/Vivianne-site/releases/download/v1.7.2/Vivianne_1.7.2_x64_en-US.msi",
+    size: "25 MB",
   },
 ];
 
@@ -89,7 +89,7 @@ export default function DownloadsPage() {
         </Reveal>
         <Reveal delay={0.1} className="mt-9 flex justify-center">
           <DownloadLink
-            href="https://github.com/v3dqnt/Vivianne-site/releases/download/v1.7.0/Vivianne_1.7.0_x64-setup.exe"
+            href="https://github.com/v3dqnt/Vivianne-site/releases/download/v1.7.2/Vivianne_1.7.2_x64-setup.exe"
             label="Download for Windows"
           />
         </Reveal>
