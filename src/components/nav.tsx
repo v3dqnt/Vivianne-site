@@ -1,5 +1,6 @@
 import { Link, buttonVariants } from "@heroui/react";
 import { Logo } from "@/components/logo";
+import { NavAccount } from "@/components/nav-account";
 
 export function Nav() {
   return (
@@ -18,9 +19,12 @@ export function Nav() {
           <span className="hidden items-center gap-6 sm:flex">
             <Link href="/changelog">Changelog</Link>
           </span>
-          <Link href="/downloads" className={buttonVariants({ size: "sm" })}>
-            Download
-          </Link>
+          <span className="flex items-center gap-3">
+            <NavAccount />
+            <Link href="/downloads" className={buttonVariants({ size: "sm" })}>
+              Download
+            </Link>
+          </span>
         </div>
       </div>
     </header>
