@@ -20,9 +20,11 @@ export function Footer() {
             </p>
           </div>
 
-          <div className="flex items-center gap-6">
+          <div className="flex flex-wrap items-center gap-x-6 gap-y-2">
             <Link href="/downloads">Downloads</Link>
             <Link href="/changelog">Changelog</Link>
+            <Link href="/privacy">Privacy</Link>
+            <Link href="/terms">Terms</Link>
             <Link href="mailto:hello@vivianne.dev">Contact</Link>
           </div>
         </div>

@@ -13,18 +13,26 @@ export const metadata: Metadata = {
   description: "Download Vivianne for your machine.",
 };
 
+// Point at the app repo's releases, not this site's. That is where the tagged
+// release is published and, critically, where the in-app updater fetches
+// `latest.json` from — serving installers from a different repo than the one
+// the updater watches is how a manual download and an auto-update end up on
+// different versions.
+const RELEASE_TAG = "v1.7.3";
+const RELEASE_BASE = `https://github.com/v3dqnt/vivianne/releases/download/${RELEASE_TAG}`;
+
 const builds = [
   {
     label: "Windows (.exe)",
     detail: "Recommended for most people. NSIS installer.",
-    href: "https://github.com/v3dqnt/Vivianne-site/releases/download/v1.7.2/Vivianne_1.7.2_x64-setup.exe",
-    size: "19 MB",
+    href: `${RELEASE_BASE}/Vivianne_1.7.3_x64-setup.exe`,
+    size: "30 MB",
   },
   {
     label: "Windows (.msi)",
     detail: "For managed or enterprise installs.",
-    href: "https://github.com/v3dqnt/Vivianne-site/releases/download/v1.7.2/Vivianne_1.7.2_x64_en-US.msi",
-    size: "25 MB",
+    href: `${RELEASE_BASE}/Vivianne_1.7.3_x64_en-US.msi`,
+    size: "38 MB",
   },
 ];
 

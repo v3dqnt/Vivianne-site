@@ -10,9 +10,25 @@ export const metadata: Metadata = {
 
 const releases = [
   {
+    id: "v1-7-3",
+    version: "v1.7.3",
+    status: "Current",
+    summary: "Programmatic tool calling, real document generation, auto-update, and a capability system that stops smaller models denying what they can do.",
+    notes: [
+      "Programmatic tool calling: the agent can write a short script that calls its own tools inline, in one turn, instead of a round-trip per call. Chaining several reads before a write, or looping over a list of files, now costs one step instead of ten.",
+      "Document generation: it writes real PDF, Word, Excel, and PowerPoint files you can open in the corresponding app. Spreadsheets keep numbers numeric, so you can actually sum them.",
+      "Auto-update, with release notes shown in-app after an upgrade, and an announcements channel for things worth saying between releases.",
+      "A capability system built from the live tool list rather than a hand-written blurb. Smaller models were reading a stale description and concluding they had no browser tools while holding nine of them; the description can no longer drift from reality, and a router names the right tools for a request at the moment it is asked.",
+      "The right sidebar and bottom bar are now tabbed and can host any view, so switching to the file tree no longer throws away what you were looking at.",
+      "A usage screen with lifetime totals, streaks, and a year-long activity heatmap, all from real recorded token counts.",
+      "The file browser previews anything: images, SVGs, and PDFs render properly instead of failing as invalid text, and you can paste or drag any file straight into the composer.",
+      "Fixed: provider errors (out of credits, rate limits) ending a turn silently with the reason visible only in the log; the browser never auto-starting on Windows; image input being dropped on models that could have read it; model choice not surviving a restart; and file mentions only ever seeing the first workspace folder.",
+    ],
+  },
+  {
     id: "v1-7",
     version: "v1.7",
-    status: "Current",
+    status: "Past release",
     summary: "A real persistent terminal, vision with an automatic OCR fallback, goal tracking, and a stalling bug fixed for good.",
     notes: [
       "A full performance pass, front to back: the panel resize drag, diff rendering, and message list no longer do unnecessary work on a long thread; the provider request context is no longer deep-cloned repeatedly on retries; token-budget checks no longer re-walk the whole transcript every turn; and the app now shuts down cleanly instead of leaving terminals, dev servers, and local models running as orphaned processes.",
@@ -76,7 +92,7 @@ export default function ChangelogPage() {
         <div className="mx-auto max-w-4xl px-6 py-24">
           <Reveal>
             <h2 className="text-2xl font-medium tracking-tight mb-8">Releases</h2>
-            <Accordion defaultExpandedKeys={["v1-7"]}>
+            <Accordion defaultExpandedKeys={["v1-7-3"]}>
               {releases.map((release) => (
                 <Accordion.Item key={release.id} id={release.id}>
                   <Accordion.Heading>

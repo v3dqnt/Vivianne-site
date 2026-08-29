@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { ArrowUpRight, Plugs, Lightning } from "@phosphor-icons/react/dist/ssr";
+import { ArrowUpRight, Plugs, Lightning, FileText } from "@phosphor-icons/react/dist/ssr";
 import { Card, Link, buttonVariants } from "@heroui/react";
 import { Reveal } from "@/components/reveal";
 import { HeroScrollExpand } from "@/components/hero-scroll-expand";
@@ -28,6 +28,17 @@ const showcases = [
     reverse: true,
   },
   {
+    id: "programmatic-tools",
+    eyebrow: "Programmatic tool calling",
+    headline: "Writes a script that runs its own tools, in one step.",
+    body: "Instead of one round-trip per tool call, it writes a short script that calls its own tools inline and runs it in-process. Reading twenty files, or chaining several searches before an edit, collapses from twenty steps into one, and every call inside still goes through the same approval you would get otherwise.",
+    image: "/subagents-panel.png",
+    width: 1918,
+    height: 1023,
+    alt: "Vivianne running a script that calls several of its own tools inline within a single step",
+    reverse: false,
+  },
+  {
     id: "local",
     eyebrow: "Local inference",
     headline: "Bring your own model, run it on your own machine.",
@@ -36,7 +47,7 @@ const showcases = [
     width: 1162,
     height: 863,
     alt: "Vivianne's Local models settings, running Qwen2.5-Coder and LFM2.5-VL directly on the machine",
-    reverse: false,
+    reverse: true,
   },
 ];
 
@@ -50,6 +61,11 @@ const extraCells = [
     icon: Lightning,
     title: "Thinks out loud, in real time",
     body: "You watch it reason and work as it happens, not a spinner followed by a wall of text at the end.",
+  },
+  {
+    icon: FileText,
+    title: "Hands you a real file",
+    body: "Ask for a report, a spreadsheet, or a deck and it writes an actual PDF, Word, Excel, or PowerPoint file you can open, not a wall of text to copy out.",
   },
 ];
 
