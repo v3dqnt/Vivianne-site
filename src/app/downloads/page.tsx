@@ -80,7 +80,7 @@ export default function DownloadsPage() {
       {/* Hero */}
       <section
         id="top"
-        className="mx-auto max-w-7xl px-6 pt-32 pb-24 text-center md:pt-40"
+        className="mx-auto max-w-7xl px-6 pt-20 pb-24 text-center md:pt-28"
       >
         <Reveal
           as="h1"
@@ -103,8 +103,8 @@ export default function DownloadsPage() {
         </Reveal>
 
         <Reveal delay={0.14} className="mt-16">
-          <div className="p-1.5 rounded-[2rem] bg-black/5 dark:bg-white/5 ring-1 ring-black/5 dark:ring-white/10">
-            <div className="overflow-hidden rounded-[calc(2rem-0.375rem)] bg-background shadow-[inset_0_1px_1px_rgba(255,255,255,0.15)]">
+          <div className="p-1.5 rounded-[var(--radius-brand)] bg-black/5 dark:bg-white/5 ring-1 ring-black/5 dark:ring-white/10">
+            <div className="overflow-hidden rounded-[var(--radius-inner)] bg-background shadow-[inset_0_1px_1px_rgba(255,255,255,0.15)]">
               <Image
                 src="/hero-interface.png"
                 alt="Vivianne's interface mid-task: reasoning, tool calls, and the Review panel showing real file changes"

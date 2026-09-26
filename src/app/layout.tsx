@@ -16,9 +16,9 @@ const sora = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "Vivianne, one AI for every task on your computer",
+  title: "Vivianne, the AI workspace that does the work",
   description:
-    "Vivianne is a desktop AI agent for coding today, and science and office work next. A real terminal, a persistent memory, and dozens of connected model providers, moving toward a fully local architecture.",
+    "Vivianne is a desktop AI agent that writes code, runs commands, drives a browser and produces finished documents, with the model you choose and every change shown to you for review.",
 };
 
 export default function RootLayout({

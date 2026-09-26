@@ -51,7 +51,11 @@ export function NavAccount() {
   if (email === undefined) return null;
 
   if (email === null) {
-    return <Link href="/sign-in">Sign in</Link>;
+    return (
+      <Link href="/sign-in" className="hidden text-sm text-body no-underline hover:text-ink sm:inline">
+        Sign in
+      </Link>
+    );
   }
 
   const initial = email.charAt(0).toUpperCase();

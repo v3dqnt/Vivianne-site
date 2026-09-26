@@ -18,7 +18,7 @@ export function LegalPage({
 }) {
   return (
     <div>
-      <section className="mx-auto max-w-3xl px-6 pt-40 pb-12 md:pt-48">
+      <section className="mx-auto max-w-3xl px-6 pt-20 pb-12 md:pt-28">
         <Reveal
           as="h1"
           className="text-3xl font-medium leading-[1.1] tracking-tight md:text-5xl"

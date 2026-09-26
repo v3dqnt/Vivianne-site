@@ -1,19 +1,21 @@
 ---
 name: Vivianne Site
-description: Airy cloudy and vivid light and sky blue ocean theme with white colors
+description: Refined sky. The airy sky-and-foam palette, tightened for a product site with a real grid, less rounding and more density
 colors:
   canvas: "#ffffff"
   surface-raised: "#ffffff"
   surface-soft: "rgba(79, 163, 255, 0.08)"
   surface-subtle: "rgba(79, 163, 255, 0.04)"
-  ink: "#0c3b6d"
+  ink: "#0b2540"
   ink-strong: "rgba(12, 59, 109, 0.82)"
-  body-text: "#466a8d"
+  body-text: "#4a6280"
   mute: "rgba(12, 59, 109, 0.5)"
-  hairline: "#d8ebff"
+  hairline: "#e1ebf6"
   hairline-strong: "rgba(79, 163, 255, 0.38)"
-  accent-sky: "#4fa3ff"
+  accent-sky: "#4f8fe0"
   accent-ocean: "#0a5a9c"
+  ocean-deep: "#072a4d"
+  canvas-alt: "#f5f9fe"
   gradient-logo: "linear-gradient(135deg, #4fa3ff 0%, #a3d5ff 55%, #ffffff 100%)"
 typography:
   h1:
@@ -33,8 +35,8 @@ typography:
     fontWeight: 500
     letterSpacing: "0.1em"
 rounded:
-  sm: 18px
-  md: 28px
+  sm: 10px
+  md: 16px
   full: 9999px
 spacing:
   sm: 8px
