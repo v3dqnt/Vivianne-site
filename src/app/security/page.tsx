@@ -79,7 +79,7 @@ export default function SecurityPage() {
     <div>
       <section className="relative overflow-hidden border-b border-hairline">
         <div className="sky-glow pointer-events-none absolute inset-0" aria-hidden />
-        <div className="relative mx-auto max-w-4xl px-6 pt-20 pb-20 md:pt-28">
+        <div className="relative mx-auto max-w-5xl px-6 pt-20 pb-20 md:pt-28">
           <span className="text-xs font-semibold uppercase tracking-[0.14em] text-sky">Security</span>
           <Reveal as="h1" className="mt-3 text-4xl font-medium leading-[1.08] tracking-tight md:text-6xl">
             An agent with real access, and a clear account of it.
