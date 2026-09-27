@@ -4,8 +4,10 @@ import { Reveal } from "@/components/reveal";
 import { Code, TestTube, Briefcase } from "@phosphor-icons/react/dist/ssr";
 
 export const metadata: Metadata = {
-  title: "Changelog, Vivianne",
-  description: "Every release of Vivianne, in order.",
+  title: "Changelog",
+  description:
+    "Every Vivianne release in order: new agent tools, subagents, memory, local models and fixes to the desktop AI agent.",
+  alternates: { canonical: "/changelog" },
 };
 
 const releases = [

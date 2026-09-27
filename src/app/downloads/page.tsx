@@ -9,8 +9,10 @@ import { Card, Chip, Link, buttonVariants } from "@heroui/react";
 import { Reveal } from "@/components/reveal";
 
 export const metadata: Metadata = {
-  title: "Downloads, Vivianne",
-  description: "Download Vivianne for your machine.",
+  title: "Download the AI agent for Windows",
+  description:
+    "Download Vivianne, the desktop AI agent for coding, science and maths. Free Windows installer (.exe or .msi) with auto-update.",
+  alternates: { canonical: "/downloads" },
 };
 
 // Point at the app repo's releases, not this site's. That is where the tagged

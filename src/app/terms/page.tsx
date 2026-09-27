@@ -3,7 +3,7 @@ import Link from "next/link";
 import { LegalPage, LegalSection, LegalList } from "@/components/legal";
 
 export const metadata: Metadata = {
-  title: "Terms of Service, Vivianne",
+  title: "Terms of Service",
   description: "The terms that govern your use of Vivianne.",
 };
 

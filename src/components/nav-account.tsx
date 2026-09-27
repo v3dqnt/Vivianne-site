@@ -51,7 +51,14 @@ export function NavAccount() {
   if (email === undefined) return null;
 
   if (email === null) {
-    return <Link href="/sign-in">Sign in</Link>;
+    return (
+      <Link
+        href="/sign-in"
+        className="text-sm text-body no-underline transition-colors hover:text-ink"
+      >
+        Sign in
+      </Link>
+    );
   }
 
   const initial = email.charAt(0).toUpperCase();
@@ -70,7 +77,7 @@ export function NavAccount() {
 
       {open && (
         <div
-          className="absolute right-0 top-[calc(100%+10px)] w-56 origin-top-right rounded-[var(--radius-inner)] border border-hairline bg-background p-1.5 shadow-[0_1px_2px_rgb(17_17_17/0.04),0_12px_32px_rgb(17_17_17/0.12)]"
+          className="absolute right-0 top-[calc(100%+10px)] w-56 origin-top-right rounded-[var(--radius-inner)] border border-hairline bg-surface-raised p-1.5 shadow-[0_12px_32px_rgba(0,0,0,0.5)]"
           role="menu"
         >
           <p className="truncate px-2.5 py-2 text-xs text-mute" title={email}>
