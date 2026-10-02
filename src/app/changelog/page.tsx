@@ -1,72 +1,15 @@
 import type { Metadata } from "next";
-import { Accordion, Chip } from "@heroui/react";
 import { Reveal } from "@/components/reveal";
-import { Code, TestTube, Briefcase } from "@phosphor-icons/react/dist/ssr";
+import { Briefcase01Icon, SourceCodeIcon, TestTube01Icon } from "@hugeicons/core-free-icons";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
+import { Badge } from "@/components/ui/badge";
+import { Icon } from "@/components/ui/icon";
+import { releases, formatReleaseDate } from "@/lib/releases";
 
 export const metadata: Metadata = {
-  title: "Changelog, Vivianne",
+  title: "Changelog",
   description: "Every release of Vivianne, in order.",
 };
-
-const releases = [
-  {
-    id: "v1-7-3",
-    version: "v1.7.3",
-    status: "Current",
-    summary: "Programmatic tool calling, real document generation, auto-update, and a capability system that stops smaller models denying what they can do.",
-    notes: [
-      "Programmatic tool calling: the agent can write a short script that calls its own tools inline, in one turn, instead of a round-trip per call. Chaining several reads before a write, or looping over a list of files, now costs one step instead of ten.",
-      "Document generation: it writes real PDF, Word, Excel, and PowerPoint files you can open in the corresponding app. Spreadsheets keep numbers numeric, so you can actually sum them.",
-      "Auto-update, with release notes shown in-app after an upgrade, and an announcements channel for things worth saying between releases.",
-      "A capability system built from the live tool list rather than a hand-written blurb. Smaller models were reading a stale description and concluding they had no browser tools while holding nine of them; the description can no longer drift from reality, and a router names the right tools for a request at the moment it is asked.",
-      "The right sidebar and bottom bar are now tabbed and can host any view, so switching to the file tree no longer throws away what you were looking at.",
-      "A usage screen with lifetime totals, streaks, and a year-long activity heatmap, all from real recorded token counts.",
-      "The file browser previews anything: images, SVGs, and PDFs render properly instead of failing as invalid text, and you can paste or drag any file straight into the composer.",
-      "Fixed: provider errors (out of credits, rate limits) ending a turn silently with the reason visible only in the log; the browser never auto-starting on Windows; image input being dropped on models that could have read it; model choice not surviving a restart; and file mentions only ever seeing the first workspace folder.",
-    ],
-  },
-  {
-    id: "v1-7",
-    version: "v1.7",
-    status: "Past release",
-    summary: "A real persistent terminal, vision with an automatic OCR fallback, goal tracking, and a stalling bug fixed for good.",
-    notes: [
-      "A full performance pass, front to back: the panel resize drag, diff rendering, and message list no longer do unnecessary work on a long thread; the provider request context is no longer deep-cloned repeatedly on retries; token-budget checks no longer re-walk the whole transcript every turn; and the app now shuts down cleanly instead of leaving terminals, dev servers, and local models running as orphaned processes.",
-      "Persistent terminal tools backed by the same PTY sessions the app's own terminal tabs use: open one, keep it alive across steps (an activated venv, a running dev server), type into it, read back what happened.",
-      "Real vision for images, with an automatic OCR fallback when the selected model can't take image input at all, so a text-only model still gets the content.",
-      "Goal tracking: a durable objective for a long task, separate from the moment-to-moment checklist, restated every turn so it survives compaction.",
-      "Honest partial scans (a capped search says so, instead of quietly looking exhaustive), line-numbered file reads, and a list_tools call to see exactly what's registered right now.",
-      "Fixed the bug behind every turn's chance of a 120-second stall, a 111MB read on every turn, New Chat not actually persisting, and the Review panel's diff view failing on real changes.",
-      "Gesture control moved out into its own standalone app; the dead Rust orchestrator module removed; bash and powershell always stream live output now.",
-    ],
-  },
-  {
-    id: "v1-5",
-    version: "v1.5",
-    status: "Past release",
-    summary: "AI Elements across the board, a real browser for web preview and search, and OpenAI's Responses API.",
-    notes: [
-      "Sources, Plan, Sandbox, Snippet, Web Preview, Queue, Checkpoints, and Confirmations: the full AI Elements set, wired into the agent's own tools.",
-      "Web preview, web search, and web_fetch now route through a real (fingerprint-spoofed) browser process instead of an iframe or plain HTML scrape. It renders sites that block embedding, and launches itself automatically the first time it's needed.",
-      "Direct OpenAI calls now speak the Responses API instead of the legacy Chat Completions endpoint, with true incremental streaming and reasoning summaries.",
-      "One-click Docker install for the sandbox tool, and a fixed cron scheduler that was silently treating every automation's local time as UTC.",
-      "A refreshed welcome screen with the real Vivianne mark, replacing the placeholder CLI command box.",
-    ],
-  },
-  {
-    id: "v1",
-    version: "v1.0",
-    status: "Past release",
-    summary: "Initial release: the coding agent, the memory pipeline, and the multi-provider harness.",
-    notes: [
-      "A single tool-use loop: propose, run, verify, with a hard step ceiling.",
-      "Three-tier memory pipeline: auto-capture, L1 fact extraction, L3 persona synthesis.",
-      "Bounded delegation, one level deep, always traceable in the session log.",
-      "One harness across model providers, with automatic context compaction.",
-      "Runs on cloud model providers, with the SSM-MoE local architecture in development.",
-    ],
-  },
-];
 
 export default function ChangelogPage() {
   return (
@@ -92,38 +35,29 @@ export default function ChangelogPage() {
         <div className="mx-auto max-w-4xl px-6 py-24">
           <Reveal>
             <h2 className="text-2xl font-medium tracking-tight mb-8">Releases</h2>
-            <Accordion defaultExpandedKeys={["v1-7-3"]}>
+            <Accordion type="single" collapsible defaultValue="v1-7-3" className="flex flex-col gap-2.5">
               {releases.map((release) => (
-                <Accordion.Item key={release.id} id={release.id}>
-                  <Accordion.Heading>
-                    <Accordion.Trigger className="w-full">
-                      <span className="flex flex-1 items-center gap-3 text-left">
-                        <span className="text-base font-medium">
-                          {release.version}
-                        </span>
-                        <Chip size="sm">{release.status}</Chip>
+                <AccordionItem key={release.id} value={release.id} id={release.id}>
+                  <AccordionTrigger>
+                    <span className="flex flex-1 flex-wrap items-center gap-x-3 gap-y-1">
+                      <span className="font-medium">{release.version}</span>
+                      <Badge variant={release.status === "Current" ? "default" : "outline"}>
+                        {release.status}
+                      </Badge>
+                      <span className="text-sm font-normal text-muted-foreground">
+                        {formatReleaseDate(release.date)}
                       </span>
-                      <Accordion.Indicator />
-                    </Accordion.Trigger>
-                  </Accordion.Heading>
-                  <Accordion.Panel>
-                    <Accordion.Body>
-                      <p className="text-sm leading-relaxed text-body">
-                        {release.summary}
-                      </p>
-                      <ul className="mt-4 space-y-2">
-                        {release.notes.map((note) => (
-                          <li
-                            key={note}
-                            className="text-sm leading-relaxed text-body"
-                          >
-                            {note}
-                          </li>
-                        ))}
-                      </ul>
-                    </Accordion.Body>
-                  </Accordion.Panel>
-                </Accordion.Item>
+                    </span>
+                  </AccordionTrigger>
+                  <AccordionContent>
+                    <p className="text-foreground/85">{release.summary}</p>
+                    <ul className="mt-4 flex list-disc flex-col gap-2 pl-4 marker:text-muted-foreground/60">
+                      {release.notes.map((note) => (
+                        <li key={note}>{note}</li>
+                      ))}
+                    </ul>
+                  </AccordionContent>
+                </AccordionItem>
               ))}
             </Accordion>
           </Reveal>
@@ -131,43 +65,29 @@ export default function ChangelogPage() {
       </section>
 
       {/* Roadmap Section */}
-      <section className="border-t border-hairline bg-surface-soft/20 py-24">
+      <section className="border-t border-hairline py-24">
         <div className="mx-auto max-w-4xl px-6">
           <Reveal>
             <h2 className="text-2xl font-medium tracking-tight mb-12">Roadmap</h2>
-            <div className="flex flex-col md:flex-row items-stretch justify-between gap-12 md:gap-4 relative">
-              
+            <div className="grid grid-cols-1 gap-3 md:grid-cols-3">
               {[
-                { title: "Coding", icon: Code, status: "Live", body: "Reads codebase, runs tools, remembers." },
-                { title: "Science", icon: TestTube, status: "Planned", body: "Literature review & data analysis." },
-                { title: "Office Work", icon: Briefcase, status: "Planned", body: "Documents, spreadsheets, admin." },
-              ].map((phase, idx, arr) => (
-                <div key={phase.title} className="flex-1 flex flex-col items-center text-center relative z-10 w-full max-w-xs mx-auto group">
-                  
-                  {/* Connecting Line (Only for non-last items) */}
-                  {idx !== arr.length - 1 && (
-                    <div className="hidden md:block absolute top-[2.25rem] left-[50%] w-full h-px bg-border -z-10" />
-                  )}
-                  
-                  <div className={`size-[4.5rem] rounded-full p-1 ring-1 ring-border/50 transition-all duration-700 ease-[cubic-bezier(0.32,0.72,0,1)] group-hover:scale-[0.98] ${phase.status === 'Live' ? 'bg-foreground' : 'bg-surface-soft'}`}>
-                    <div className={`w-full h-full rounded-full flex items-center justify-center ${phase.status === 'Live' ? 'bg-foreground text-background shadow-inner' : 'bg-surface text-foreground shadow-[inset_0_1px_1px_rgba(255,255,255,0.15)]'}`}>
-                      <phase.icon size={28} weight={phase.status === 'Live' ? 'fill' : 'light'} />
-                    </div>
+                { title: "Coding", icon: SourceCodeIcon, status: "Live", body: "Reads your codebase, runs tools, remembers." },
+                { title: "Science", icon: TestTube01Icon, status: "Planned", body: "Literature review and data analysis." },
+                { title: "Office work", icon: Briefcase01Icon, status: "Planned", body: "Documents, spreadsheets, admin." },
+              ].map((phase) => (
+                <div key={phase.title} className="surface-card flex flex-col gap-4 rounded-xl p-5">
+                  <div className="flex items-center justify-between">
+                    <span className="flex size-9 items-center justify-center rounded-md bg-secondary text-foreground">
+                      <Icon icon={phase.icon} size={18} />
+                    </span>
+                    <Badge variant={phase.status === "Live" ? "default" : "outline"}>{phase.status}</Badge>
                   </div>
-
-                  <div className="mt-8 p-1.5 rounded-[2rem] bg-black/5 dark:bg-white/5 ring-1 ring-black/5 dark:ring-white/10 w-full transition-all duration-700 ease-[cubic-bezier(0.32,0.72,0,1)] hover:-translate-y-1">
-                    <div className="bg-background shadow-[inset_0_1px_1px_rgba(255,255,255,0.15)] rounded-[calc(2rem-0.375rem)] p-5 h-full flex flex-col items-center justify-center">
-                      <div className="flex justify-center items-center gap-3 mb-3">
-                        <h3 className="font-medium text-base">{phase.title}</h3>
-                        <Chip size="sm" color={phase.status === 'Live' ? "default" : "default"} variant={phase.status === 'Live' ? "primary" : "soft"}>{phase.status}</Chip>
-                      </div>
-                      <p className="text-sm leading-relaxed text-mute">{phase.body}</p>
-                    </div>
+                  <div>
+                    <h3 className="text-base font-medium">{phase.title}</h3>
+                    <p className="mt-1 text-sm leading-relaxed text-muted-foreground">{phase.body}</p>
                   </div>
-
                 </div>
               ))}
-
             </div>
           </Reveal>
         </div>

@@ -1,4 +1,4 @@
-import { Link } from "@heroui/react";
+import { TextLink } from "@/components/ui/text-link";
 import { Logo } from "@/components/logo";
 
 export function Footer() {
@@ -14,18 +14,19 @@ export function Footer() {
               </span>
             </div>
             <p className="mt-4 max-w-[38ch] text-sm text-body">
-              An AI system for coding today, and soon science and office
-              work too. Moving toward a fully local architecture, so nothing
-              you work on will have to leave your machine.
+              A desktop AI agent and agentic harness for coding, math, and
+              science. Works with any model provider, or a local model
+              that never leaves your machine.
             </p>
           </div>
 
-          <div className="flex flex-wrap items-center gap-x-6 gap-y-2">
-            <Link href="/downloads">Downloads</Link>
-            <Link href="/changelog">Changelog</Link>
-            <Link href="/privacy">Privacy</Link>
-            <Link href="/terms">Terms</Link>
-            <Link href="mailto:hello@vivianne.dev">Contact</Link>
+          <div className="flex flex-wrap items-center gap-x-6 gap-y-4">
+            <TextLink href="/downloads">Downloads</TextLink>
+            <TextLink href="/changelog">Changelog</TextLink>
+            <TextLink href="/faq">FAQ</TextLink>
+            <TextLink href="/privacy">Privacy</TextLink>
+            <TextLink href="/terms">Terms</TextLink>
+            <TextLink href="mailto:hello@vivianne.dev">Contact</TextLink>
           </div>
         </div>
       </div>

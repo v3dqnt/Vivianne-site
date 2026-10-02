@@ -2,7 +2,9 @@
 
 import { Suspense, useState } from "react";
 import { useSearchParams } from "next/navigation";
-import { Button, TextField, Label, Input, FieldError } from "@heroui/react";
+import { ToggleGroup } from "radix-ui";
+import { Button } from "@/components/ui/button";
+import { Input, Label } from "@/components/ui/field";
 import { supabase } from "@/lib/supabase";
 
 type Mode = "signIn" | "signUp";
@@ -89,22 +91,26 @@ function SignInForm() {
         <p className="text-sm leading-relaxed text-mute">Signing in for Vivianne on your computer.</p>
       )}
 
-      <div className="flex gap-1 rounded-full bg-surface-soft p-1 w-fit">
-        <button
-          type="button"
-          onClick={() => setMode("signIn")}
-          className={`rounded-full px-4 py-1.5 text-sm font-medium transition-colors ${mode === "signIn" ? "bg-background shadow-sm" : "text-mute"}`}
-        >
-          Sign in
-        </button>
-        <button
-          type="button"
-          onClick={() => setMode("signUp")}
-          className={`rounded-full px-4 py-1.5 text-sm font-medium transition-colors ${mode === "signUp" ? "bg-background shadow-sm" : "text-mute"}`}
-        >
-          Create account
-        </button>
-      </div>
+      <ToggleGroup.Root
+        type="single"
+        value={mode}
+        onValueChange={(v) => v && setMode(v as Mode)}
+        aria-label="Sign in or create an account"
+        className="flex h-9 w-fit items-center gap-0.5 rounded-full bg-muted p-1 ring-1 ring-border"
+      >
+        {([
+          ["signIn", "Sign in"],
+          ["signUp", "Create account"],
+        ] as const).map(([value, label]) => (
+          <ToggleGroup.Item
+            key={value}
+            value={value}
+            className="h-full rounded-full px-3 text-sm font-medium text-foreground/60 outline-none transition-colors duration-[var(--dur-fast)] hover:text-foreground focus-visible:ring-3 focus-visible:ring-ring/40 data-[state=on]:bg-input/40 data-[state=on]:text-foreground"
+          >
+            {label}
+          </ToggleGroup.Item>
+        ))}
+      </ToggleGroup.Root>
 
       <form
         className="flex flex-col gap-4"
@@ -113,36 +119,36 @@ function SignInForm() {
           void submit();
         }}
       >
-        <TextField className="flex flex-col gap-1.5">
-          <Label className="text-sm font-medium">Email</Label>
+        <div className="flex flex-col gap-1.5">
+          <Label htmlFor="email">Email</Label>
           <Input
+            id="email"
             type="email"
+            autoComplete="email"
             required
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            className="rounded-[var(--radius-inner)] border border-hairline bg-background px-3.5 py-2.5 text-sm outline-none focus:ring-2 focus:ring-ink"
           />
-          <FieldError className="text-xs text-red-600" />
-        </TextField>
+        </div>
 
-        <TextField className="flex flex-col gap-1.5">
-          <Label className="text-sm font-medium">Password</Label>
+        <div className="flex flex-col gap-1.5">
+          <Label htmlFor="password">Password</Label>
           <Input
+            id="password"
             type="password"
+            autoComplete={mode === "signIn" ? "current-password" : "new-password"}
             required
             minLength={6}
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            className="rounded-[var(--radius-inner)] border border-hairline bg-background px-3.5 py-2.5 text-sm outline-none focus:ring-2 focus:ring-ink"
           />
-          <FieldError className="text-xs text-red-600" />
-        </TextField>
+        </div>
 
-        <Button type="submit" isDisabled={loading || !email || password.length < 6} className="mt-1">
+        <Button type="submit" disabled={loading || !email || password.length < 6} className="mt-1">
           {loading ? "Working…" : mode === "signIn" ? "Sign in" : "Create account"}
         </Button>
 
-        {error && <p className="text-xs text-red-600">{error}</p>}
+        {error && <p role="alert" className="text-xs text-destructive">{error}</p>}
       </form>
     </div>
   );

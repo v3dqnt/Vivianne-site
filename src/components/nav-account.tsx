@@ -1,93 +1,66 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
-import { Link } from "@heroui/react";
-import { SignOut } from "@phosphor-icons/react/dist/ssr";
+import { useEffect, useState } from "react";
+import { DropdownMenu } from "radix-ui";
+import { Logout01Icon } from "@hugeicons/core-free-icons";
+import { Icon } from "@/components/ui/icon";
+import { TextLink } from "@/components/ui/text-link";
 import { supabase } from "@/lib/supabase";
 
-/** Signed-in/out state for the navbar — a small client island inside the
- * otherwise-static `Nav`, since it's the one piece that needs the browser's
- * persisted Supabase session (`supabase.auth.getSession()` reads whatever
- * `/sign-in` last wrote to localStorage; `onAuthStateChange` keeps it live
- * across tabs without a manual refresh).
+/** Signed-in/out state for the navbar — a small client island, since it's
+ * the one piece that needs the browser's persisted Supabase session
+ * (`supabase.auth.getSession()` reads whatever `/sign-in` last wrote to
+ * localStorage; `onAuthStateChange` keeps it live across tabs).
  *
  * Signed in renders as a fixed-size avatar chip, not the raw email inline —
- * the nav is a fixed-width pill, and an email of arbitrary length sitting
- * directly in it either overflows or forces an ugly truncation the pill
- * wasn't laid out for. The email lives in the dropdown instead, where there's
- * room for it. */
+ * an email of arbitrary length would overflow the nav. The email lives in
+ * the dropdown instead, where there's room for it. */
 export function NavAccount() {
   const [email, setEmail] = useState<string | null | undefined>(undefined);
-  const [open, setOpen] = useState(false);
-  const rootRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     supabase.auth.getSession().then(({ data }) => setEmail(data.session?.user.email ?? null));
     const { data: sub } = supabase.auth.onAuthStateChange((_event, session) => {
       setEmail(session?.user.email ?? null);
-      setOpen(false);
     });
     return () => sub.subscription.unsubscribe();
   }, []);
-
-  useEffect(() => {
-    if (!open) return;
-    const onPointerDown = (e: PointerEvent) => {
-      if (rootRef.current && !rootRef.current.contains(e.target as Node)) setOpen(false);
-    };
-    const onKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "Escape") setOpen(false);
-    };
-    document.addEventListener("pointerdown", onPointerDown);
-    document.addEventListener("keydown", onKeyDown);
-    return () => {
-      document.removeEventListener("pointerdown", onPointerDown);
-      document.removeEventListener("keydown", onKeyDown);
-    };
-  }, [open]);
 
   // `undefined` = still checking — render nothing rather than a flash of
   // "Sign in" that immediately swaps to the signed-in state.
   if (email === undefined) return null;
 
   if (email === null) {
-    return <Link href="/sign-in">Sign in</Link>;
+    return <TextLink href="/sign-in">Sign in</TextLink>;
   }
 
-  const initial = email.charAt(0).toUpperCase();
-
   return (
-    <div ref={rootRef} className="relative">
-      <button
-        type="button"
-        onClick={() => setOpen((v) => !v)}
+    <DropdownMenu.Root>
+      <DropdownMenu.Trigger
         aria-label="Account"
-        aria-expanded={open}
-        className="flex size-9 shrink-0 items-center justify-center rounded-full bg-foreground text-sm font-medium text-background transition-transform duration-200 ease-out hover:scale-105 active:scale-95"
+        className="flex size-8 shrink-0 items-center justify-center rounded-full bg-secondary text-sm font-medium text-foreground outline-none transition-colors duration-[var(--dur-fast)] hover:bg-accent focus-visible:ring-3 focus-visible:ring-ring/40"
       >
-        {initial}
-      </button>
-
-      {open && (
-        <div
-          className="absolute right-0 top-[calc(100%+10px)] w-56 origin-top-right rounded-[var(--radius-inner)] border border-hairline bg-background p-1.5 shadow-[0_1px_2px_rgb(17_17_17/0.04),0_12px_32px_rgb(17_17_17/0.12)]"
-          role="menu"
+        {email.charAt(0).toUpperCase()}
+      </DropdownMenu.Trigger>
+      <DropdownMenu.Portal>
+        <DropdownMenu.Content
+          align="end"
+          sideOffset={10}
+          className="surface-float z-50 min-w-48 max-w-64 animate-overlay-in rounded-3xl p-1.5 outline-none"
         >
-          <p className="truncate px-2.5 py-2 text-xs text-mute" title={email}>
+          <DropdownMenu.Label className="truncate px-3 py-2.5 text-xs text-muted-foreground" title={email}>
             {email}
-          </p>
-          <div className="my-1 h-px bg-hairline" />
-          <button
-            type="button"
-            role="menuitem"
-            onClick={() => void supabase.auth.signOut()}
-            className="flex w-full items-center gap-2 rounded-[calc(var(--radius-inner)-6px)] px-2.5 py-2 text-left text-sm text-ink transition-colors hover:bg-surface-soft"
+          </DropdownMenu.Label>
+          <DropdownMenu.Separator className="-mx-1.5 my-1.5 h-px bg-border/50" />
+          <DropdownMenu.Item
+            onSelect={() => void supabase.auth.signOut()}
+            className="flex cursor-pointer items-center gap-2.5 rounded-2xl px-3 py-2 text-sm font-medium text-foreground outline-none data-[highlighted]:bg-accent"
           >
-            <SignOut size={15} />
+            <Icon icon={Logout01Icon} size={16} className="text-muted-foreground" />
             Sign out
-          </button>
-        </div>
-      )}
-    </div>
+          </DropdownMenu.Item>
+        </DropdownMenu.Content>
+      </DropdownMenu.Portal>
+    </DropdownMenu.Root>
   );
 }

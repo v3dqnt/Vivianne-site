@@ -21,7 +21,7 @@ export function HeroScrollExpand({ children }: { children: React.ReactNode }) {
         opacity: 1,
         y: 0,
         scale: 1,
-        clipPath: "inset(0% round 2rem)",
+        clipPath: "inset(0% round 14px)",
       });
       return;
     }
@@ -33,13 +33,13 @@ export function HeroScrollExpand({ children }: { children: React.ReactNode }) {
           opacity: 0.6,
           y: 44,
           scale: 0.82,
-          clipPath: "inset(9% round 2rem)",
+          clipPath: "inset(9% round 14px)",
         },
         {
           opacity: 1,
           y: 0,
           scale: 1,
-          clipPath: "inset(0% round 2rem)",
+          clipPath: "inset(0% round 14px)",
           ease: "none",
           scrollTrigger: {
             trigger: ref.current,

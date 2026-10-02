@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { LegalPage, LegalSection, LegalList, Term } from "@/components/legal";
 
 export const metadata: Metadata = {
-  title: "Privacy Policy, Vivianne",
+  title: "Privacy Policy",
   description: "How Vivianne collects, uses, and safeguards your information.",
 };
 

@@ -1,15 +1,14 @@
 import type { Metadata } from "next";
 import Image from "next/image";
-import {
-  ArrowUpRight,
-  WindowsLogo,
-  DownloadSimple,
-} from "@phosphor-icons/react/dist/ssr";
-import { Card, Chip, Link, buttonVariants } from "@heroui/react";
+import { ArrowUpRight01Icon, Download04Icon, WindowsNewIcon } from "@hugeicons/core-free-icons";
+import { Badge } from "@/components/ui/badge";
+import { buttonVariants } from "@/components/ui/button";
+import { CardDescription, CardTitle } from "@/components/ui/card";
+import { Icon } from "@/components/ui/icon";
 import { Reveal } from "@/components/reveal";
 
 export const metadata: Metadata = {
-  title: "Downloads, Vivianne",
+  title: "Download the Vivianne AI agent for Windows",
   description: "Download Vivianne for your machine.",
 };
 
@@ -61,15 +60,10 @@ function DownloadLink({ href, label }: { href: string; label: string }) {
   return (
     <a
       href={href}
-      className={buttonVariants({
-        size: "lg",
-        className: "group gap-3 pr-2",
-      })}
+      className={buttonVariants({ size: "lg" })}
     >
       {label}
-      <span className="btn-icon-circle">
-        <DownloadSimple size={14} weight="bold" />
-      </span>
+      <Icon icon={Download04Icon} size={16} />
     </a>
   );
 }
@@ -93,18 +87,18 @@ export default function DownloadsPage() {
           as="p"
           className="mx-auto mt-6 max-w-[46ch] text-lg leading-relaxed text-body"
         >
-          v1.7, for Windows. macOS and Linux builds are on the way.
+          {RELEASE_TAG}, for Windows. macOS and Linux builds are on the way.
         </Reveal>
         <Reveal delay={0.1} className="mt-9 flex justify-center">
           <DownloadLink
-            href="https://github.com/v3dqnt/Vivianne-site/releases/download/v1.7.2/Vivianne_1.7.2_x64-setup.exe"
+            href={builds[0].href}
             label="Download for Windows"
           />
         </Reveal>
 
         <Reveal delay={0.14} className="mt-16">
-          <div className="p-1.5 rounded-[2rem] bg-black/5 dark:bg-white/5 ring-1 ring-black/5 dark:ring-white/10">
-            <div className="overflow-hidden rounded-[calc(2rem-0.375rem)] bg-background shadow-[inset_0_1px_1px_rgba(255,255,255,0.15)]">
+          <div className="surface-card rounded-xl p-1.5">
+            <div className="overflow-hidden rounded-md bg-background">
               <Image
                 src="/hero-interface.png"
                 alt="Vivianne's interface mid-task: reasoning, tool calls, and the Review panel showing real file changes"
@@ -120,7 +114,7 @@ export default function DownloadsPage() {
       {/* All builds */}
       <section className="border-t border-hairline">
         <div className="mx-auto max-w-5xl px-6 py-24">
-          <span className="eyebrow">All builds</span>
+          <Badge variant="outline">All builds</Badge>
           <Reveal
             as="h2"
             className="mt-4 text-2xl font-medium tracking-tight md:text-3xl"
@@ -131,18 +125,21 @@ export default function DownloadsPage() {
           <div className="mt-10 grid grid-cols-1 gap-6 md:grid-cols-2">
             {builds.map((build, i) => (
               <Reveal key={build.label} delay={i * 0.06}>
-                <a href={build.href} className="block bezel-shell h-full outline-none focus-visible:ring-2 focus-visible:ring-ink focus-visible:ring-offset-4 rounded-[var(--radius-brand)]">
-                  <div className="flex h-full items-start justify-between gap-4 bezel-core p-8 cursor-pointer">
-                    <div className="flex items-start gap-4">
-                      <span className="flex size-11 shrink-0 items-center justify-center rounded-full bg-surface-soft">
-                        <WindowsLogo size={20} weight="light" />
+                <a
+                  href={build.href}
+                  className="surface-card group block h-full rounded-xl p-5 no-underline outline-none transition-transform duration-[var(--dur-base)] ease-[var(--ease-premium)] hover:-translate-y-0.5 focus-visible:ring-3 focus-visible:ring-ring/40 md:p-6"
+                >
+                  <div className="flex h-full items-start justify-between gap-3 md:gap-4">
+                    <div className="flex min-w-0 flex-1 items-start gap-3 md:gap-4">
+                      <span className="flex size-9 shrink-0 items-center justify-center rounded-md bg-secondary text-foreground">
+                        <Icon icon={WindowsNewIcon} size={18} />
                       </span>
-                      <Card.Header className="p-0">
-                        <Card.Title>{build.label}</Card.Title>
-                        <Card.Description>{build.detail}</Card.Description>
-                      </Card.Header>
+                      <div className="min-w-0">
+                        <CardTitle>{build.label}</CardTitle>
+                        <CardDescription className="mt-1">{build.detail}</CardDescription>
+                      </div>
                     </div>
-                    <Chip size="sm">{build.size}</Chip>
+                    <Badge variant="outline">{build.size}</Badge>
                   </div>
                 </a>
               </Reveal>
@@ -154,7 +151,7 @@ export default function DownloadsPage() {
       {/* Installation steps, placeholders for later */}
       <section className="border-t border-hairline">
         <div className="mx-auto max-w-5xl px-6 py-24">
-          <span className="eyebrow">Installation</span>
+          <Badge variant="outline">Installation</Badge>
           <Reveal
             as="h2"
             className="mt-4 text-2xl font-medium tracking-tight md:text-3xl"
@@ -183,7 +180,7 @@ export default function DownloadsPage() {
                 <img 
                   src={step.image} 
                   alt={step.title} 
-                  className="w-full rounded-[var(--radius-inner)] border border-hairline shadow-sm"
+                  className="w-full rounded-xl border border-border"
                 />
               </Reveal>
             ))}
@@ -201,12 +198,13 @@ export default function DownloadsPage() {
             Questions before you install?
           </Reveal>
           <Reveal delay={0.06}>
-            <Link href="mailto:hello@vivianne.dev">
+            <a
+              href="mailto:hello@vivianne.dev"
+              className={buttonVariants({ variant: "outline" })}
+            >
               Get in touch
-              <Link.Icon>
-                <ArrowUpRight size={12} />
-              </Link.Icon>
-            </Link>
+              <Icon icon={ArrowUpRight01Icon} size={16} />
+            </a>
           </Reveal>
         </div>
       </section>
