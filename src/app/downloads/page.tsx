@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
-import { ArrowUpRight01Icon, Download04Icon, WindowsNewIcon } from "@hugeicons/core-free-icons";
+import { AppleIcon, ArrowUpRight01Icon, Download04Icon, WindowsNewIcon } from "@hugeicons/core-free-icons";
 import { Badge } from "@/components/ui/badge";
 import { buttonVariants } from "@/components/ui/button";
 import { CardDescription, CardTitle } from "@/components/ui/card";
@@ -8,8 +8,8 @@ import { Icon } from "@/components/ui/icon";
 import { Reveal } from "@/components/reveal";
 
 export const metadata: Metadata = {
-  title: "Download the Vivianne AI agent for Windows",
-  description: "Download Vivianne for your machine.",
+  title: "Download the Vivianne AI agent for macOS and Windows",
+  description: "Download Vivianne for your machine: a universal macOS build and Windows installers.",
 };
 
 // Point at the app repo's releases, not this site's. That is where the tagged
@@ -17,21 +17,31 @@ export const metadata: Metadata = {
 // `latest.json` from — serving installers from a different repo than the one
 // the updater watches is how a manual download and an auto-update end up on
 // different versions.
-const RELEASE_TAG = "v1.7.3";
-const RELEASE_BASE = `https://github.com/v3dqnt/vivianne/releases/download/${RELEASE_TAG}`;
+const VERSION = "1.9.0";
+const RELEASE_TAG = `v${VERSION}`;
+const RELEASE_BASE = `https://github.com/v3dqnt/vivianne-releases/releases/download/${RELEASE_TAG}`;
 
 const builds = [
   {
     label: "Windows (.exe)",
     detail: "Recommended for most people. NSIS installer.",
-    href: `${RELEASE_BASE}/Vivianne_1.7.3_x64-setup.exe`,
-    size: "30 MB",
+    href: `${RELEASE_BASE}/Vivianne_${VERSION}_x64-setup.exe`,
+    size: "35 MB",
+    icon: WindowsNewIcon,
   },
   {
     label: "Windows (.msi)",
     detail: "For managed or enterprise installs.",
-    href: `${RELEASE_BASE}/Vivianne_1.7.3_x64_en-US.msi`,
-    size: "38 MB",
+    href: `${RELEASE_BASE}/Vivianne_${VERSION}_x64_en-US.msi`,
+    size: "47 MB",
+    icon: WindowsNewIcon,
+  },
+  {
+    label: "macOS (universal)",
+    detail: "Recommended for Mac. .dmg for Intel and Apple silicon.",
+    href: `${RELEASE_BASE}/Vivianne_${VERSION}_universal.dmg`,
+    size: "75 MB",
+    icon: AppleIcon,
   },
 ];
 
@@ -39,13 +49,13 @@ const steps = [
   {
     number: "01",
     title: "Download the installer",
-    body: "Grab the .exe or .msi installer from the links above to get started.",
+    body: "Grab the .dmg for macOS, or the .exe or .msi for Windows, from the links above to get started.",
     image: "/download%20installer.png",
   },
   {
     number: "02",
     title: "Run the installer",
-    body: "Follow the setup wizard to install Vivianne on your machine.",
+    body: "On Windows, follow the setup wizard. On macOS, open the .dmg and drag Vivianne into Applications.",
     image: "/installer%20run.png",
   },
   {
@@ -56,12 +66,17 @@ const steps = [
   },
 ];
 
-function DownloadLink({ href, label }: { href: string; label: string }) {
+function DownloadLink({
+  href,
+  label,
+  variant,
+}: {
+  href: string;
+  label: string;
+  variant?: "default" | "outline";
+}) {
   return (
-    <a
-      href={href}
-      className={buttonVariants({ size: "lg" })}
-    >
+    <a href={href} className={buttonVariants({ size: "lg", variant })}>
       {label}
       <Icon icon={Download04Icon} size={16} />
     </a>
@@ -87,12 +102,14 @@ export default function DownloadsPage() {
           as="p"
           className="mx-auto mt-6 max-w-[46ch] text-lg leading-relaxed text-body"
         >
-          {RELEASE_TAG}, for Windows. macOS and Linux builds are on the way.
+          {RELEASE_TAG}, for macOS and Windows. Linux builds are on the way.
         </Reveal>
-        <Reveal delay={0.1} className="mt-9 flex justify-center">
+        <Reveal delay={0.1} className="mt-9 flex flex-wrap justify-center gap-3">
+          <DownloadLink href={builds[0].href} label="Download for Windows" />
           <DownloadLink
-            href={builds[0].href}
-            label="Download for Windows"
+            href={builds[2].href}
+            label="Download for macOS"
+            variant="outline"
           />
         </Reveal>
 
@@ -122,7 +139,7 @@ export default function DownloadsPage() {
             Choose your installer.
           </Reveal>
 
-          <div className="mt-10 grid grid-cols-1 gap-6 md:grid-cols-2">
+          <div className="mt-10 grid grid-cols-1 gap-6 md:grid-cols-3">
             {builds.map((build, i) => (
               <Reveal key={build.label} delay={i * 0.06}>
                 <a
@@ -132,7 +149,7 @@ export default function DownloadsPage() {
                   <div className="flex h-full items-start justify-between gap-3 md:gap-4">
                     <div className="flex min-w-0 flex-1 items-start gap-3 md:gap-4">
                       <span className="flex size-9 shrink-0 items-center justify-center rounded-md bg-secondary text-foreground">
-                        <Icon icon={WindowsNewIcon} size={18} />
+                        <Icon icon={build.icon} size={18} />
                       </span>
                       <div className="min-w-0">
                         <CardTitle>{build.label}</CardTitle>
@@ -177,9 +194,9 @@ export default function DownloadsPage() {
                     {step.body}
                   </p>
                 </div>
-                <img 
-                  src={step.image} 
-                  alt={step.title} 
+                <img
+                  src={step.image}
+                  alt={step.title}
                   className="w-full rounded-xl border border-border"
                 />
               </Reveal>

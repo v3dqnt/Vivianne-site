@@ -33,7 +33,7 @@ const experiments = [
   {
     icon: UserMultipleIcon,
     title: "Multiplayer",
-    status: "In progress",
+    status: "Live",
     body: "Two Vivianne instances paired over a direct, encrypted peer-to-peer link, sharing agent activity and one chat to divide up the work.",
   },
   {

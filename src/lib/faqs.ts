@@ -11,7 +11,7 @@ export const faqs: { q: string; a: string }[] = [
   },
   {
     q: "Can two people work together in Vivianne?",
-    a: "Multiplayer is coming soon. Two people pair their Vivianne apps with a short code over a direct, encrypted peer-to-peer connection, follow each other's agent sessions turn by turn, and chat to divide up the work, with no account or central server required.",
+    a: "Yes. Two people pair their Vivianne apps with a short code over a direct, encrypted peer-to-peer connection, follow each other's agent sessions turn by turn, and chat to divide up the work, with no account or central server required.",
   },
   {
     q: "Is Vivianne an AI coding agent?",
@@ -19,7 +19,7 @@ export const faqs: { q: string; a: string }[] = [
   },
   {
     q: "Can Vivianne help with math and science?",
-    a: "It can already write and run code to check calculations, analyse data, and produce real documents. Dedicated math and science workflows, like inline charts, diagrams, and literature review, are in progress and will ship in upcoming releases.",
+    a: "Yes. It writes and runs code to check calculations, analyses data, and produces real documents. Science work is live too: chemical structures and reactions, 3D molecules and proteins, biology diagrams, physics graphs and interactive diagrams, with Greek letters and chemical equations anywhere.",
   },
   {
     q: "Which AI models does it work with?",
@@ -31,6 +31,6 @@ export const faqs: { q: string; a: string }[] = [
   },
   {
     q: "What platforms does it run on?",
-    a: "Windows today. macOS and Linux builds are on the way.",
+    a: "Windows and macOS. Windows ships as .exe and .msi installers; macOS ships as one universal .dmg for Intel and Apple silicon. Linux builds are on the way.",
   },
 ];

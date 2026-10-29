@@ -50,14 +50,14 @@ const disciplines = [
   {
     icon: MathIcon,
     title: "Mathematics",
-    status: "In progress",
+    status: "Live",
     keyword: "AI agent for math",
     body: "Works a problem the way you would: sets it up, writes and runs code to check each step numerically, and plots the result instead of guessing at it.",
   },
   {
     icon: AtomIcon,
     title: "Science",
-    status: "In progress",
+    status: "Live",
     keyword: "AI for scientific research",
     body: "Literature review, data analysis, and reproducible experiments, orchestrating the scientific tools you already use rather than replacing them.",
   },
@@ -111,13 +111,13 @@ const highlights = [
   {
     title: "Master and employee agents",
     body: "Hand a project to a master agent and it staffs a team of specialists that do the work or run swarms, all reporting back to one place.",
-    meta: "Product · Coming soon",
+    meta: "Product · Live",
     href: "#agents",
   },
   {
-    title: "Multiplayer is on the way",
+    title: "Multiplayer is live",
     body: "Pair two Vivianne instances with a short code, follow each other's agent sessions, and split the work in one shared chat.",
-    meta: "Product · Coming soon",
+    meta: "Product · Live",
     href: "#multiplayer",
   },
   {
@@ -145,7 +145,7 @@ const jsonLd = [
     "@type": "SoftwareApplication",
     name: "Vivianne",
     applicationCategory: "DeveloperApplication",
-    operatingSystem: "Windows",
+    operatingSystem: "Windows, macOS",
     url: "https://vivianne.dev",
     downloadUrl: "https://vivianne.dev/downloads",
     image: "https://vivianne.dev/hero-interface.png",
@@ -224,7 +224,7 @@ export default function Home() {
             choice or one running locally.
           </p>
           <div className="mt-12 flex flex-wrap items-center justify-center gap-3">
-            <CtaLink href="/downloads" label="Download for Windows" />
+            <CtaLink href="/downloads" label="Download for Windows & macOS" />
             <NextLink href="#agents" className={buttonVariants({ variant: "outline", size: "lg" })}>
               Meet the agent team
               <Icon icon={ArrowDown01Icon} size={16} />
@@ -334,7 +334,7 @@ export default function Home() {
             </div>
 
             <div className="order-1 flex flex-col justify-center p-8 md:p-12 lg:order-2">
-              <Badge variant="outline">Coming soon</Badge>
+              <Badge variant="outline">Live</Badge>
               <Reveal as="h2" className="mt-5 max-w-[24ch] text-xl font-medium leading-snug tracking-tight md:text-2xl">
                 <span className="text-ink">Multiplayer.</span>{" "}
                 <span className="text-body">
@@ -367,8 +367,7 @@ export default function Home() {
           <Reveal delay={0.05}>
             <p className="mt-6 max-w-[60ch] text-base leading-relaxed text-body">
               Same harness, same tools, same memory, whatever the problem is.
-              Coding is where it is strongest today; math and science workflows
-              are being built on top of it now.
+              Coding, mathematics, and science are all live today, on one agent.
             </p>
           </Reveal>
 
@@ -517,8 +516,8 @@ export default function Home() {
             Put a real agent on your desktop.
           </Reveal>
           <Reveal delay={0.06} className="flex flex-col items-center gap-4">
-            <CtaLink href="/downloads" label="Download for Windows" />
-            <span className="text-xs text-muted-foreground">Windows today · macOS and Linux on the way</span>
+            <CtaLink href="/downloads" label="Download for Windows & macOS" />
+            <span className="text-xs text-muted-foreground">Windows and macOS today · Linux on the way</span>
           </Reveal>
         </div>
       </section>

@@ -37,6 +37,7 @@ export const metadata: Metadata = {
     "agentic AI",
     "desktop AI agent",
     "AI agent for Windows",
+    "AI agent for macOS",
     "AI agent for math",
     "AI for science",
     "AI research assistant",
