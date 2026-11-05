@@ -6,10 +6,6 @@ export const faqs: { q: string; a: string }[] = [
     a: "A language model on its own only produces text. An agent harness is the runtime around it: the loop that plans and calls tools, manages context and memory, asks for approval before risky actions, and checkpoints work so it can resume. Vivianne is a harness you install on your computer, so any capable model becomes an agent that finishes real tasks.",
   },
   {
-    q: "What are master and employee agents?",
-    a: "You hand a task to the master agent, which plans it and staffs a team of employee agents. Each employee is a specialist scoped to its own part of the project, with its own files and tools, and either does the work itself or runs a swarm of subagents. Employees report back to the master, and nothing is delegated until you approve the team.",
-  },
-  {
     q: "Can two people work together in Vivianne?",
     a: "Yes. Two people pair their Vivianne apps with a short code over a direct, encrypted peer-to-peer connection, follow each other's agent sessions turn by turn, and chat to divide up the work, with no account or central server required.",
   },

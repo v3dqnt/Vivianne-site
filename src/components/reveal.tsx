@@ -25,20 +25,20 @@ export function Reveal({
       "(prefers-reduced-motion: reduce)"
     ).matches;
     if (reduce) {
-      gsap.set(ref.current, { opacity: 1, y: 0, filter: "blur(0px)" });
+      gsap.set(ref.current, { opacity: 1, y: 0, scale: 1 });
       return;
     }
 
-    gsap.set(ref.current, { filter: "blur(6px)" });
+    gsap.set(ref.current, { scale: 0.95, transformOrigin: "left center" });
 
     const ctx = gsap.context(() => {
       gsap.to(ref.current, {
         opacity: 1,
         y: 0,
-        filter: "blur(0px)",
-        duration: 0.9,
+        scale: 1,
+        duration: 1,
         delay,
-        ease: "power4.out",
+        ease: "expo.out",
         scrollTrigger: {
           trigger: ref.current,
           start: "top 85%",

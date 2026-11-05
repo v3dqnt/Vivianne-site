@@ -1,10 +1,10 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import NextLink from "next/link";
 import { DropdownMenu } from "radix-ui";
 import { Logout01Icon } from "@hugeicons/core-free-icons";
 import { Icon } from "@/components/ui/icon";
-import { TextLink } from "@/components/ui/text-link";
 import { supabase } from "@/lib/supabase";
 
 /** Signed-in/out state for the navbar — a small client island, since it's
@@ -31,7 +31,14 @@ export function NavAccount() {
   if (email === undefined) return null;
 
   if (email === null) {
-    return <TextLink href="/sign-in">Sign in</TextLink>;
+    return (
+      <NextLink
+        href="/sign-in"
+        className="text-sm font-medium text-foreground no-underline transition-opacity duration-[var(--dur-fast)] hover:opacity-70"
+      >
+        Sign in
+      </NextLink>
+    );
   }
 
   return (

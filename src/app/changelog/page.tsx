@@ -47,7 +47,7 @@ export default function ChangelogPage() {
       </section>
 
       {/* Releases Section */}
-      <section className="border-t border-hairline">
+      <section>
         <div className="mx-auto max-w-4xl px-6 py-24">
           <Reveal>
             <h2 className="text-2xl font-medium tracking-tight mb-8">Releases</h2>
@@ -81,7 +81,7 @@ export default function ChangelogPage() {
       </section>
 
       {/* Roadmap Section */}
-      <section className="border-t border-hairline py-24">
+      <section className="py-24">
         <div className="mx-auto max-w-4xl px-6">
           <Reveal>
             <h2 className="text-2xl font-medium tracking-tight mb-12">Roadmap</h2>

@@ -1,14 +1,17 @@
 import type { Metadata, Viewport } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist_Mono } from "next/font/google";
+import localFont from "next/font/local";
 import "lenis/dist/lenis.css";
 import "./globals.css";
 import { Nav } from "@/components/nav";
+import { SiteSound } from "@/components/site-sound";
 import { Footer } from "@/components/footer";
 import { SmoothScroll } from "@/components/smooth-scroll";
 
-const geist = Geist({
-  subsets: ["latin"],
-  variable: "--font-geist",
+const generalSans = localFont({
+  src: "./fonts/GeneralSans-Variable.woff2",
+  weight: "200 700",
+  variable: "--font-general-sans",
   display: "swap",
 });
 
@@ -19,7 +22,7 @@ const geistMono = Geist_Mono({
 });
 
 const description =
-  "Vivianne is a desktop AI agent and agentic harness for coding, math, science, and technology work. Hand work to a master agent that runs a team of specialist employee agents and swarms, with a real terminal, persistent memory, and any model: Anthropic, OpenAI, Google, OpenAI-compatible APIs, or local GGUF models offline.";
+  "Vivianne is a desktop agent harness for code, math, and science: its own agent on your keys with 25+ providers or a local model, 24/7 agents with routines, multiplayer, and other harnesses like Claude Code and Codex over the Agent Client Protocol.";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://vivianne.dev"),
@@ -47,10 +50,14 @@ export const metadata: Metadata = {
     "GGUF",
     "bring your own model",
     "subagents",
+    "Agent Client Protocol",
+    "ACP",
+    "BYOK",
+    "24/7 AI agents",
+    "always-on AI agent",
+    "plan mode",
     "multi-agent",
     "agent swarm",
-    "AI agent team",
-    "orchestrator agent",
     "multiplayer AI coding",
     "AI pair programming",
     "collaborative AI agent",
@@ -76,8 +83,8 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#0a0a0a",
-  colorScheme: "dark",
+  themeColor: "#cfd1d5",
+  colorScheme: "light",
 };
 
 export default function RootLayout({
@@ -86,12 +93,18 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" data-theme="dark" className={`${geist.variable} ${geistMono.variable} dark h-full antialiased`}>
-      <body className="min-h-full flex flex-col bg-canvas text-ink">
+    <html lang="en" className={`${generalSans.variable} ${geistMono.variable} h-full antialiased`}>
+      <body className="relative flex min-h-full flex-col text-ink">
         <SmoothScroll />
-        <div className="grain" />
+        <a
+          href="#main"
+          className="sr-only z-50 rounded-md bg-primary px-3 py-2 text-sm text-primary-foreground focus:not-sr-only focus:fixed focus:left-4 focus:top-4"
+        >
+          Skip to Content
+        </a>
+        <SiteSound />
         <Nav />
-        <main className="flex-1">{children}</main>
+        <main id="main" className="flex-1">{children}</main>
         <Footer />
       </body>
     </html>

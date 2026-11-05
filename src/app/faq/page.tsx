@@ -6,7 +6,7 @@ import { faqs } from "@/lib/faqs";
 export const metadata: Metadata = {
   title: "FAQ",
   description:
-    "Answers about Vivianne: what an agent harness is, master and employee agents, multiplayer, supported models, and running local models offline.",
+    "Answers about Vivianne: what an agent harness is, multiplayer, the vault, supported models, and running local models offline.",
   alternates: { canonical: "/faq" },
 };
 

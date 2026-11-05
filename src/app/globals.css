@@ -1,39 +1,46 @@
 @import "tailwindcss";
 
-/* Terax-style chrome: quiet, monochrome, near-black and near-white with no
-   brand colour. Hierarchy comes from tone steps and weight, never colour.
+/* Silver: polished metal with near-black ink, and no colour beyond the metal.
    Tokens use shadcn naming; the older site names (canvas, ink, body, mute,
-   hairline, surface-*) are kept as aliases so every page follows along. */
-:root,
-.dark,
-[data-theme="dark"] {
-  color-scheme: dark;
+   hairline, surface-*) are kept as aliases so every page follows along.
+   `.ink-tokens` flips any subtree to dark metal: the beams, footer, and cards. */
+:root {
+  color-scheme: light;
 
-  --background: #141414;
-  --foreground: #f7f7f7;
-  --card: #1d1d1d;
-  --card-foreground: #f7f7f7;
-  --popover: #1d1d1d;
-  --popover-foreground: #f7f7f7;
-  --primary: #f7f7f7;
-  --primary-foreground: #141414;
-  --secondary: #2a2a2a;
-  --secondary-foreground: #f7f7f7;
-  --muted: #1d1d1d;
-  --muted-foreground: #a3a3a3;
-  --accent: #2a2a2a;
-  --accent-foreground: #f7f7f7;
-  --destructive: #e35d5d;
-  --border: rgba(255, 255, 255, 0.09);
-  --input: rgba(255, 255, 255, 0.13);
-  --ring: #8a8a8a;
-  --frame: color-mix(in oklab, var(--card) 97%, var(--foreground) 3%);
+  --silver: #cfd1d5;
+  --background: var(--silver);
+  --foreground: #0e0f11;
+  --card: #dfe1e4;
+  --card-foreground: #0e0f11;
+  --popover: #e3e5e8;
+  --popover-foreground: #0e0f11;
+  --primary: #0e0f11;
+  --primary-foreground: #eef0f2;
+  --secondary: #b9bcc2;
+  --secondary-foreground: #0e0f11;
+  --muted: #c3c6cb;
+  --muted-foreground: #44474d;
+  --accent: #bfc2c7;
+  --accent-foreground: #0e0f11;
+  --destructive: #a32626;
+  --border: rgba(14, 15, 17, 0.16);
+  --input: rgba(14, 15, 17, 0.22);
+  --ring: #44474d;
+  --frame: var(--card);
+  --ink-strong: rgba(14, 15, 17, 0.85);
+  --mute: rgba(14, 15, 17, 0.58);
+  --hairline-strong: rgba(14, 15, 17, 0.28);
+  --surface-soft: rgba(14, 15, 17, 0.07);
+  --surface-subtle: rgba(14, 15, 17, 0.03);
+  --edge: rgb(14 15 17 / 0.1);
+  --lift: rgb(14 15 17 / 0.14);
+  --sheen: rgb(255 255 255 / 0.55);
 
   /* Shape: one base radius with a multiplicative scale. Controls and
      overlays are round; working surfaces (panes, cards) stay tight. */
   --radius: 0.625rem;
   --pane-radius: calc(var(--radius) * 1.4);
-  --pane-shadow: inset 0 1px 0 oklch(1 0 0 / 0.035);
+  --pane-shadow: inset 0 1px 0 var(--sheen);
 
   /* Motion */
   --dur-fast: 160ms;
@@ -48,15 +55,50 @@
   --chrome: var(--card);
   --surface-raised: var(--card);
   --ink: var(--foreground);
-  --ink-strong: rgba(247, 247, 247, 0.85);
   --body: var(--muted-foreground);
-  --mute: rgba(247, 247, 247, 0.45);
   --hairline: var(--border);
-  --hairline-strong: rgba(255, 255, 255, 0.2);
-  --surface-soft: rgba(247, 247, 247, 0.07);
-  --surface-subtle: rgba(247, 247, 247, 0.03);
   --radius-brand: var(--pane-radius);
   --radius-inner: calc(var(--radius) * 0.8);
+}
+
+.ink-tokens {
+  color-scheme: dark;
+  color: var(--foreground);
+
+  --background: #09090b;
+  --foreground: #eef0f2;
+  --card: #16171a;
+  --card-foreground: #eef0f2;
+  --popover: #16171a;
+  --popover-foreground: #eef0f2;
+  --primary: #d9dbde;
+  --primary-foreground: #0e0f11;
+  --secondary: #24262a;
+  --secondary-foreground: #eef0f2;
+  --muted: #16171a;
+  --muted-foreground: #a9acb1;
+  --accent: #24262a;
+  --accent-foreground: #eef0f2;
+  --border: rgba(255, 255, 255, 0.12);
+  --input: rgba(255, 255, 255, 0.16);
+  --ring: #a9acb1;
+  --frame: var(--card);
+  --ink-strong: rgba(238, 240, 242, 0.85);
+  --mute: rgba(238, 240, 242, 0.55);
+  --hairline-strong: rgba(255, 255, 255, 0.22);
+  --surface-soft: rgba(238, 240, 242, 0.07);
+  --surface-subtle: rgba(238, 240, 242, 0.03);
+  --edge: rgb(238 240 242 / 0.12);
+  --lift: rgb(0 0 0 / 0.35);
+  --sheen: rgb(255 255 255 / 0.06);
+
+  /* These aliases resolve where they are declared, so they restate here. */
+  --canvas: var(--background);
+  --chrome: var(--card);
+  --surface-raised: var(--card);
+  --ink: var(--foreground);
+  --body: var(--muted-foreground);
+  --hairline: var(--border);
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -102,7 +144,7 @@
   --color-surface-soft: var(--surface-soft);
   --color-surface-subtle: var(--surface-subtle);
 
-  --font-sans: var(--font-geist);
+  --font-sans: var(--font-general-sans);
   --font-mono: var(--font-geist-mono);
 
   --radius-sm: calc(var(--radius) * 0.6);
@@ -130,18 +172,35 @@
   border-color: var(--border);
 }
 
-html,
-body {
+html {
   background: var(--background);
+}
+
+/* Anchor jumps and focused elements clear the 4rem sticky header. */
+html {
+  scroll-padding-top: 5rem;
+  -webkit-tap-highlight-color: transparent;
+}
+
+a,
+button,
+[role="button"] {
+  touch-action: manipulation;
+}
+
+h1,
+h2,
+h3 {
+  text-wrap: balance;
 }
 
 body {
   color: var(--foreground);
-  font-family: var(--font-geist), system-ui, sans-serif;
+  font-family: var(--font-general-sans), system-ui, sans-serif;
 }
 
 ::selection {
-  background: rgba(247, 247, 247, 0.2);
+  background: color-mix(in oklab, var(--foreground) 20%, transparent);
   color: var(--foreground);
 }
 
@@ -154,9 +213,9 @@ body {
 .surface-card {
   background: var(--card);
   box-shadow:
-    0 0 0 1px rgb(247 247 247 / 0.1),
-    0 4px 6px -1px rgb(0 0 0 / 0.25),
-    0 2px 4px -2px rgb(0 0 0 / 0.25),
+    0 0 0 1px var(--edge),
+    0 4px 6px -1px var(--lift),
+    0 2px 4px -2px var(--lift),
     var(--pane-shadow);
 }
 
@@ -167,9 +226,9 @@ body {
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   box-shadow:
-    0 0 0 1px rgb(247 247 247 / 0.1),
-    0 10px 15px -3px rgb(0 0 0 / 0.35),
-    0 4px 6px -4px rgb(0 0 0 / 0.35),
+    0 0 0 1px var(--edge),
+    0 10px 15px -3px var(--lift),
+    0 4px 6px -4px var(--lift),
     var(--pane-shadow);
 }
 
@@ -181,46 +240,32 @@ body {
   }
 }
 
-.grain {
-  position: fixed;
-  inset: 0;
-  z-index: 60;
-  pointer-events: none;
-  opacity: 0.03;
-  mix-blend-mode: overlay;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+/* Card copy stays selectable; the vendored plate turns selection off for tilt. */
+.reflective-card {
+  user-select: text;
+  -webkit-user-select: text;
 }
+
 
 [data-reveal] {
   opacity: 0;
   transform: translateY(40px);
 }
 
+/* Feature copy (feature-copy.tsx): hidden until its timeline plays, so
+   nothing flashes before hydration. GSAP's inline styles take over. */
+@media (prefers-reduced-motion: no-preference) {
+  [data-feature] :is([data-ft="badge"], [data-ft="rest"], [data-ft="chip"]) {
+    opacity: 0;
+  }
+  [data-feature] [data-ft="word"] {
+    transform: translateY(110%);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   [data-reveal] {
     opacity: 1;
     transform: none;
-  }
-}
-
-/* Stand-in for the Viv Instant character: the breathing orb the app renders
-   until the 3D model lands, in brushed monochrome. */
-.viv-orb {
-  border-radius: 9999px;
-  background:
-    radial-gradient(circle at 35% 30%, #ffffff, transparent 42%),
-    radial-gradient(circle at 50% 50%, #cfcfcf, #6e6e6e 68%, #1d1d1d);
-  box-shadow: 0 0 60px rgb(247 247 247 / 0.14), inset 0 -8px 24px rgb(0 0 0 / 0.45);
-  animation: viv-listen 2.4s ease-in-out infinite;
-}
-
-@keyframes viv-listen {
-  0%, 100% { transform: scale(1); opacity: 0.8; }
-  50% { transform: scale(1.08); opacity: 1; }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .viv-orb {
-    animation: none;
   }
 }

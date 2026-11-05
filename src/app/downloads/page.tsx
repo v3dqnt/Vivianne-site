@@ -129,7 +129,7 @@ export default function DownloadsPage() {
       </section>
 
       {/* All builds */}
-      <section className="border-t border-hairline">
+      <section>
         <div className="mx-auto max-w-5xl px-6 py-24">
           <Badge variant="outline">All builds</Badge>
           <Reveal
@@ -166,7 +166,7 @@ export default function DownloadsPage() {
       </section>
 
       {/* Installation steps, placeholders for later */}
-      <section className="border-t border-hairline">
+      <section>
         <div className="mx-auto max-w-5xl px-6 py-24">
           <Badge variant="outline">Installation</Badge>
           <Reveal
@@ -206,7 +206,7 @@ export default function DownloadsPage() {
       </section>
 
       {/* Closing note */}
-      <section className="border-t border-hairline">
+      <section>
         <div className="mx-auto flex max-w-7xl flex-col items-center gap-6 px-6 py-24 text-center">
           <Reveal
             as="h2"

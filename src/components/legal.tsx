@@ -43,7 +43,7 @@ export function LegalPage({
         ) : null}
       </section>
 
-      <section className="border-t border-hairline">
+      <section>
         <div className="mx-auto max-w-3xl px-6 py-16 md:py-20">
           <div className="flex flex-col gap-10">{children}</div>
         </div>
