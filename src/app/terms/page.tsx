@@ -100,7 +100,7 @@ export default function TermsPage() {
       </LegalSection>
 
       <LegalSection heading="10. Disclaimers">
-        <p className="uppercase text-[13px] leading-relaxed tracking-wide">
+        <p className="type-body font-medium text-foreground">
           The application is provided &ldquo;as is&rdquo; and &ldquo;as
           available&rdquo; without warranties of any kind, express or implied,
           including but not limited to the implied warranties of
@@ -111,7 +111,7 @@ export default function TermsPage() {
       </LegalSection>
 
       <LegalSection heading="11. Limitation of liability">
-        <p className="uppercase text-[13px] leading-relaxed tracking-wide">
+        <p className="type-body font-medium text-foreground">
           To the maximum extent permitted by law, in no event shall we, our
           affiliates, or our licensors be liable for any indirect, incidental,
           special, consequential, or punitive damages, including lost profits or

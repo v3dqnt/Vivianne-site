@@ -7,7 +7,7 @@ export const faqs: { q: string; a: string }[] = [
   },
   {
     q: "Can two people work together in Vivianne?",
-    a: "Yes. Two people pair their Vivianne apps with a short code over a direct, encrypted peer-to-peer connection, follow each other's agent sessions turn by turn, and chat to divide up the work, with no account or central server required.",
+    a: "Yes. Two people pair their Vivianne apps with a short code over a direct, encrypted peer-to-peer connection, follow each other’s agent sessions turn by turn, and chat to divide up the work, with no account or central server required.",
   },
   {
     q: "Is Vivianne an AI coding agent?",

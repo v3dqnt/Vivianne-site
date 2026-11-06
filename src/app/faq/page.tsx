@@ -28,11 +28,11 @@ export default function FaqPage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, "\u003c") }}
       />
       <section className="mx-auto max-w-3xl px-6 pt-40 pb-12 md:pt-48">
-        <Reveal as="h1" className="text-3xl font-medium leading-[1.1] tracking-tight md:text-5xl">
+        <Reveal as="h1" className="type-h1">
           Frequently asked questions
         </Reveal>
-        <Reveal delay={0.06} as="p" className="mt-4 max-w-[52ch] text-base leading-relaxed text-body">
-          How Vivianne works, what it runs on, and what&apos;s coming next.
+        <Reveal delay={0.06} as="p" className="mt-4 max-w-[52ch] type-lead text-body">
+          How Vivianne works, what it runs on, and what’s coming next.
         </Reveal>
       </section>
 
@@ -45,7 +45,7 @@ export default function FaqPage() {
             </AccordionItem>
           ))}
         </Accordion>
-        <p className="mt-10 text-sm text-body">
+        <p className="type-body mt-10 text-body">
           Something else?{" "}
           <a href="mailto:hello@vivianne.dev" className="font-medium text-foreground underline-offset-4 hover:underline">
             hello@vivianne.dev

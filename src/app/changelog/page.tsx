@@ -17,7 +17,7 @@ function renderNote(text: string) {
     part.startsWith("`") && part.endsWith("`") ? (
       <code
         key={i}
-        className="rounded bg-secondary px-1 py-0.5 font-mono text-[0.9em] text-foreground"
+        className="rounded bg-secondary px-1 py-0.5 font-mono text-[0.85em] text-foreground"
       >
         {part.slice(1, -1)}
       </code>
@@ -33,24 +33,24 @@ export default function ChangelogPage() {
       <section className="mx-auto max-w-4xl px-6 pt-40 pb-16 md:pt-48">
         <Reveal
           as="h1"
-          className="text-3xl font-medium leading-[1.1] tracking-tight md:text-5xl"
+          className="type-h1"
         >
           Changelog & Roadmap
         </Reveal>
         <Reveal
           delay={0.06}
           as="p"
-          className="mt-4 max-w-[46ch] text-base leading-relaxed text-body"
+          className="mt-4 max-w-[46ch] type-lead text-body"
         >
-          See what&apos;s already here, and where Vivianne is headed.
+          See what’s already here, and where Vivianne is headed.
         </Reveal>
       </section>
 
       {/* Releases Section */}
       <section>
-        <div className="mx-auto max-w-4xl px-6 py-24">
+        <div className="mx-auto max-w-4xl px-6 pb-24 pt-4">
           <Reveal>
-            <h2 className="text-2xl font-medium tracking-tight mb-8">Releases</h2>
+            <h2 className="type-h3 mb-8">Releases</h2>
             <Accordion type="single" collapsible defaultValue="v1-9-0" className="flex flex-col gap-2.5">
               {releases.map((release) => (
                 <AccordionItem key={release.id} value={release.id} id={release.id}>
@@ -60,7 +60,7 @@ export default function ChangelogPage() {
                       <Badge variant={release.status === "Current" ? "default" : "outline"}>
                         {release.status}
                       </Badge>
-                      <span className="text-sm font-normal text-muted-foreground">
+                      <span className="type-small font-normal text-muted-foreground">
                         {formatReleaseDate(release.date)}
                       </span>
                     </span>
@@ -84,7 +84,7 @@ export default function ChangelogPage() {
       <section className="py-24">
         <div className="mx-auto max-w-4xl px-6">
           <Reveal>
-            <h2 className="text-2xl font-medium tracking-tight mb-12">Roadmap</h2>
+            <h2 className="type-h3 mb-12">Roadmap</h2>
             <div className="grid grid-cols-1 gap-3 md:grid-cols-3">
               {[
                 { title: "Coding", icon: SourceCodeIcon, status: "Live", body: "Reads your codebase, runs tools, remembers." },
@@ -99,8 +99,8 @@ export default function ChangelogPage() {
                     <Badge variant={phase.status === "Live" ? "default" : "outline"}>{phase.status}</Badge>
                   </div>
                   <div>
-                    <h3 className="text-base font-medium">{phase.title}</h3>
-                    <p className="mt-1 text-sm leading-relaxed text-muted-foreground">{phase.body}</p>
+                    <h3 className="type-h4">{phase.title}</h3>
+                    <p className="mt-1 type-body text-muted-foreground">{phase.body}</p>
                   </div>
                 </div>
               ))}

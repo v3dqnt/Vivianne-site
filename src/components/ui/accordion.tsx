@@ -22,7 +22,7 @@ export function AccordionTrigger({
       <Heading className="m-0">
         <A.Trigger
           className={cn(
-            "group flex w-full cursor-pointer items-center justify-between gap-6 rounded-xl px-5 py-4 text-left text-sm font-medium outline-none focus-visible:ring-3 focus-visible:ring-ring/40 md:text-base",
+            "group flex w-full cursor-pointer items-center justify-between gap-6 rounded-xl px-5 py-4 text-left type-body font-medium outline-none focus-visible:ring-3 focus-visible:ring-ring/40 md:text-base",
             className,
           )}
           {...props}
@@ -53,7 +53,7 @@ export function AccordionContent({
       {...props}
     >
       <div className="min-h-0 overflow-hidden">
-        <div className={cn("px-5 pb-5 text-sm leading-relaxed text-muted-foreground", className)}>
+        <div className={cn("type-body px-5 pb-5 text-muted-foreground", className)}>
           {children}
         </div>
       </div>

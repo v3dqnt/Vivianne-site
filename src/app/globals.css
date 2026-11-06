@@ -190,8 +190,21 @@ button,
 
 h1,
 h2,
-h3 {
+h3,
+h4 {
   text-wrap: balance;
+}
+
+p,
+li,
+dd {
+  text-wrap: pretty;
+}
+
+body {
+  font-kerning: normal;
+  font-optical-sizing: auto;
+  text-rendering: optimizeLegibility;
 }
 
 body {
@@ -255,7 +268,7 @@ body {
 /* Feature copy (feature-copy.tsx): hidden until its timeline plays, so
    nothing flashes before hydration. GSAP's inline styles take over. */
 @media (prefers-reduced-motion: no-preference) {
-  [data-feature] :is([data-ft="badge"], [data-ft="rest"], [data-ft="chip"]) {
+  [data-feature] :is([data-ft="art"], [data-ft="badge"], [data-ft="rest"]) {
     opacity: 0;
   }
   [data-feature] [data-ft="word"] {
@@ -267,5 +280,105 @@ body {
   [data-reveal] {
     opacity: 1;
     transform: none;
+  }
+}
+
+/* Drafting paper: a faint grid that fades out toward the edges. */
+.grid-paper {
+  background-image:
+    linear-gradient(to right, color-mix(in oklab, var(--foreground) 7%, transparent) 1px, transparent 1px),
+    linear-gradient(to bottom, color-mix(in oklab, var(--foreground) 7%, transparent) 1px, transparent 1px);
+  background-size: 48px 48px;
+  background-position: center top;
+  mask-image: radial-gradient(ellipse 75% 65% at 50% 45%, #000 25%, transparent 100%);
+}
+
+/* ACP glyph (acp-glyph.tsx): each agent and its spoke light in turn. */
+@keyframes acp-turn {
+  0%, 10% { opacity: 1; }
+  20%, 100% { opacity: 0.32; }
+}
+
+.acp-turn {
+  opacity: 0.32;
+  animation: acp-turn 8s var(--ease-soft) infinite both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .acp-turn {
+    animation: none;
+    opacity: 0.75;
+  }
+}
+
+/* Type scale. Each role has one size per breakpoint, one weight, one leading
+   and one tracking, so a heading on any page matches its peers elsewhere.
+     display  the home hero
+     h1       page titles and the closing statement
+     h2       section headings
+     h3       sub-sections and featured card titles
+     h4       item titles: features, steps, legal clauses
+     lead     the paragraph under a title
+     body     running text, never below 1rem
+     small    dates, versions, captions                            */
+@layer components {
+  .type-display {
+    font-size: 2.75rem;
+    font-weight: 500;
+    line-height: 1.04;
+    letter-spacing: -0.035em;
+  }
+  .type-h1 {
+    font-size: 2.5rem;
+    font-weight: 500;
+    line-height: 1.06;
+    letter-spacing: -0.032em;
+  }
+  .type-h2 {
+    font-size: 1.875rem;
+    font-weight: 500;
+    line-height: 1.14;
+    letter-spacing: -0.026em;
+  }
+  .type-h3 {
+    font-size: 1.5rem;
+    font-weight: 500;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+  }
+  .type-h4 {
+    font-size: 1.125rem;
+    font-weight: 500;
+    line-height: 1.35;
+    letter-spacing: -0.012em;
+  }
+  .type-lead {
+    font-size: 1.0625rem;
+    line-height: 1.6;
+    letter-spacing: -0.003em;
+  }
+  .type-body {
+    font-size: 1rem;
+    line-height: 1.65;
+  }
+  .type-small {
+    font-size: 0.875rem;
+    line-height: 1.5;
+    letter-spacing: 0.002em;
+  }
+
+  @media (min-width: 768px) {
+    .type-display { font-size: 3.75rem; }
+    .type-h1 { font-size: 3.25rem; }
+    .type-h2 { font-size: 2.375rem; }
+    .type-h3 { font-size: 1.75rem; }
+    .type-h4 { font-size: 1.1875rem; }
+    .type-lead { font-size: 1.1875rem; }
+  }
+
+  @media (min-width: 1024px) {
+    .type-display { font-size: 4.5rem; }
+    .type-h1 { font-size: 3.75rem; }
+    .type-h2 { font-size: 2.625rem; }
   }
 }

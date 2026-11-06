@@ -9,8 +9,8 @@ import { supabase } from "@/lib/supabase";
 
 type Mode = "signIn" | "signUp";
 
-/** Builds the app's local callback URL with the session appended as query
- * params (the app's own `TcpListener` reads them off the request line, not
+/** Builds the app’s local callback URL with the session appended as query
+ * params (the app’s own `TcpListener` reads them off the request line, not
  * the fragment — a fragment is never sent in an HTTP request at all). */
 function buildRedirect(redirectTo: string, state: string, session: { access_token: string; refresh_token: string; expires_at?: number }) {
   const url = new URL(redirectTo);
@@ -72,7 +72,7 @@ function SignInForm() {
   if (done) {
     return (
       <p className="text-sm leading-relaxed text-body">
-        You&apos;re signed in. You can close this tab.
+        You’re signed in. You can close this tab.
       </p>
     );
   }
@@ -157,7 +157,7 @@ function SignInForm() {
 export default function SignInPage() {
   return (
     <div className="mx-auto flex min-h-[80vh] max-w-sm flex-col justify-center px-6 py-24">
-      <h1 className="text-2xl font-medium tracking-tight">Sign in to Vivianne</h1>
+      <h1 className="type-h3">Sign in to Vivianne</h1>
       <p className="mt-2 text-sm leading-relaxed text-mute">One account, synced across every device you install Vivianne on.</p>
       <div className="mt-8">
         <Suspense fallback={null}>

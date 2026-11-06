@@ -3,7 +3,7 @@ import { Logo } from "@/components/logo";
 
 export function Footer() {
   return (
-    <footer data-ink className="ink-tokens relative bg-background">
+    <footer data-ink className="ink-tokens relative -mt-px bg-background">
       <div className="mx-auto max-w-7xl px-6 py-16">
         <div className="flex flex-col gap-8 md:flex-row md:items-start md:justify-between">
           <div>

@@ -3,7 +3,7 @@ import { Reveal } from "@/components/reveal";
 
 /** Shared shell for the policy pages. Long-form legal prose is the one place
  * on this site where a narrower measure and looser leading matter more than
- * the marketing layout's rhythm, so it gets its own container rather than
+ * the marketing layout’s rhythm, so it gets its own container rather than
  * reusing a section from the landing page. */
 export function LegalPage({
   title,
@@ -21,14 +21,14 @@ export function LegalPage({
       <section className="mx-auto max-w-3xl px-6 pt-40 pb-12 md:pt-48">
         <Reveal
           as="h1"
-          className="text-3xl font-medium leading-[1.1] tracking-tight md:text-5xl"
+          className="type-h1"
         >
           {title}
         </Reveal>
         <Reveal
           delay={0.06}
           as="p"
-          className="mt-4 text-sm text-body/70"
+          className="mt-4 type-small text-body/70"
         >
           Last updated: {updated}
         </Reveal>
@@ -36,7 +36,7 @@ export function LegalPage({
           <Reveal
             delay={0.1}
             as="p"
-            className="mt-6 max-w-[60ch] text-base leading-relaxed text-body"
+            className="mt-6 max-w-[60ch] type-lead text-body"
           >
             {intro}
           </Reveal>
@@ -61,8 +61,8 @@ export function LegalSection({
 }) {
   return (
     <section className="flex flex-col gap-3">
-      <h2 className="text-lg font-medium tracking-tight">{heading}</h2>
-      <div className="flex flex-col gap-3 text-[15px] leading-relaxed text-body">
+      <h2 className="type-h4">{heading}</h2>
+      <div className="flex flex-col gap-3 type-body text-body">
         {children}
       </div>
     </section>

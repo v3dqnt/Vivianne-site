@@ -68,7 +68,7 @@ export default function PrivacyPage() {
             <>
               <Term>AI service providers:</Term> when you send a prompt to the
               assistant it is transmitted to a third-party AI provider (for
-              example OpenAI, Anthropic, or Google) under that provider&apos;s
+              example OpenAI, Anthropic, or Google) under that provider’s
               own privacy policy. We do not sell your data to unrelated third
               parties.
             </>,
@@ -114,7 +114,7 @@ export default function PrivacyPage() {
         </p>
       </LegalSection>
 
-      <LegalSection heading="6. Children's privacy">
+      <LegalSection heading="6. Children’s privacy">
         <p>
           Vivianne is not intended for children under the age of 13. We do not
           knowingly collect personal information from children. If you believe

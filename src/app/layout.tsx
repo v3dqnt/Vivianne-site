@@ -22,7 +22,7 @@ const geistMono = Geist_Mono({
 });
 
 const description =
-  "Vivianne is a desktop agent harness for code, math, and science: its own agent on your keys with 25+ providers or a local model, 24/7 agents with routines, multiplayer, and other harnesses like Claude Code and Codex over the Agent Client Protocol.";
+  "Vivianne is a desktop AI agent for code, math, and science: its own agent with any model or a local one, coding agents like Claude Code over the Agent Client Protocol, always-on assistants, and computer control.";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://vivianne.dev"),
@@ -49,15 +49,12 @@ export const metadata: Metadata = {
     "run local models offline",
     "GGUF",
     "bring your own model",
-    "subagents",
     "Agent Client Protocol",
     "ACP",
     "BYOK",
     "24/7 AI agents",
     "always-on AI agent",
     "plan mode",
-    "multi-agent",
-    "agent swarm",
     "multiplayer AI coding",
     "AI pair programming",
     "collaborative AI agent",

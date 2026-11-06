@@ -3,6 +3,8 @@
 import { useEffect, useState } from "react";
 import NextLink from "next/link";
 import { usePathname } from "next/navigation";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { Popover } from "radix-ui";
 import { Cancel01Icon, Menu01Icon } from "@hugeicons/core-free-icons";
 import { Logo } from "@/components/logo";
@@ -11,10 +13,11 @@ import { SoundToggle } from "@/components/site-sound";
 import { buttonVariants } from "@/components/ui/button";
 import { Icon } from "@/components/ui/icon";
 
+gsap.registerPlugin(ScrollTrigger);
+
 const menuLinks = [
-  { href: "/faq", label: "FAQ" },
   { href: "/changelog", label: "Changelog" },
-  { href: "/downloads", label: "Downloads" },
+  { href: "/faq", label: "FAQ" },
 ];
 
 export function Nav() {
@@ -51,17 +54,19 @@ export function Nav() {
   // the links readable over cards of either tone.
   const [scrolled, setScrolled] = useState(false);
   useEffect(() => {
-    const sync = () => setScrolled(window.scrollY > 24);
-    sync();
-    window.addEventListener("scroll", sync, { passive: true });
-    return () => window.removeEventListener("scroll", sync);
+    const trigger = ScrollTrigger.create({
+      start: 24,
+      end: "max",
+      onToggle: (self) => setScrolled(self.isActive),
+    });
+    return () => trigger.kill();
   }, []);
 
   return (
     <header
       className={`fixed inset-x-0 top-0 z-40 w-full text-foreground transition-[background-color] duration-[var(--dur-base)] ${
         overInk ? "ink-tokens" : ""
-      } ${scrolled ? "bg-background/90" : ""}`}
+      } ${scrolled ? "bg-background/95" : ""}`}
     >
       <div className="mx-auto flex h-16 w-full max-w-7xl items-center justify-between gap-3 px-6">
         <NextLink href="/" className="no-underline">
@@ -72,7 +77,19 @@ export function Nav() {
         </NextLink>
 
         <div className="flex items-center gap-1.5 sm:gap-5">
-          <span className="hidden items-center gap-5 sm:flex">
+          <nav aria-label="Primary" className="hidden items-center gap-6 md:flex">
+            {menuLinks.map((l) => (
+              <NextLink
+                key={l.href}
+                href={l.href}
+                aria-current={pathname === l.href ? "page" : undefined}
+                className="text-sm font-medium text-foreground no-underline transition-opacity duration-[var(--dur-fast)] hover:opacity-70 aria-[current=page]:opacity-60"
+              >
+                {l.label}
+              </NextLink>
+            ))}
+          </nav>
+          <span className="hidden items-center sm:flex">
             <NavAccount />
           </span>
           <SoundToggle />
@@ -86,7 +103,7 @@ export function Nav() {
               className={buttonVariants({
                 variant: "ghost",
                 size: "icon",
-                className: "sm:hidden",
+                className: "md:hidden",
               })}
             >
               <Icon icon={open ? Cancel01Icon : Menu01Icon} size={18} />
@@ -96,7 +113,7 @@ export function Nav() {
               <Popover.Content
                 align="end"
                 sideOffset={8}
-                className="surface-float z-50 w-60 animate-overlay-in rounded-3xl p-1.5 outline-none sm:hidden"
+                className="surface-float z-50 w-60 animate-overlay-in rounded-3xl p-1.5 outline-none md:hidden"
               >
                 <nav aria-label="Menu">
                   <ul className="flex flex-col">

@@ -12,7 +12,7 @@ export const metadata: Metadata = {
   description: "Download Vivianne for your machine: a universal macOS build and Windows installers.",
 };
 
-// Point at the app repo's releases, not this site's. That is where the tagged
+// Point at the app repo’s releases, not this site’s. That is where the tagged
 // release is published and, critically, where the in-app updater fetches
 // `latest.json` from — serving installers from a different repo than the one
 // the updater watches is how a manual download and an auto-update end up on
@@ -61,7 +61,7 @@ const steps = [
   {
     number: "03",
     title: "Launch Vivianne",
-    body: "Open Vivianne and it's ready to handle tasks directly on your computer.",
+    body: "Open Vivianne and it’s ready to handle tasks directly on your computer.",
     image: "/vivianne%20launched.png",
   },
 ];
@@ -93,14 +93,14 @@ export default function DownloadsPage() {
       >
         <Reveal
           as="h1"
-          className="mx-auto max-w-[18ch] text-4xl font-medium leading-[1.05] tracking-tight md:text-6xl"
+          className="mx-auto max-w-[18ch] type-h1"
         >
           Download Vivianne
         </Reveal>
         <Reveal
           delay={0.06}
           as="p"
-          className="mx-auto mt-6 max-w-[46ch] text-lg leading-relaxed text-body"
+          className="mx-auto mt-6 max-w-[46ch] type-lead text-body"
         >
           {RELEASE_TAG}, for macOS and Windows. Linux builds are on the way.
         </Reveal>
@@ -118,7 +118,7 @@ export default function DownloadsPage() {
             <div className="overflow-hidden rounded-md bg-background">
               <Image
                 src="/hero-interface.png"
-                alt="Vivianne's interface mid-task: reasoning, tool calls, and the Review panel showing real file changes"
+                alt="Vivianne’s interface mid-task: reasoning, tool calls, and the Review panel showing real file changes"
                 width={1920}
                 height={1080}
                 className="w-full h-auto"
@@ -134,7 +134,7 @@ export default function DownloadsPage() {
           <Badge variant="outline">All builds</Badge>
           <Reveal
             as="h2"
-            className="mt-4 text-2xl font-medium tracking-tight md:text-3xl"
+            className="mt-4 type-h3"
           >
             Choose your installer.
           </Reveal>
@@ -171,7 +171,7 @@ export default function DownloadsPage() {
           <Badge variant="outline">Installation</Badge>
           <Reveal
             as="h2"
-            className="mt-4 text-2xl font-medium tracking-tight md:text-3xl"
+            className="mt-4 type-h3"
           >
             Getting set up.
           </Reveal>
@@ -187,10 +187,10 @@ export default function DownloadsPage() {
                   <span className="text-xs font-medium tracking-wide text-mute">
                     {step.number}
                   </span>
-                  <h3 className="mt-2 text-xl font-medium tracking-tight">
+                  <h3 className="mt-2 type-h4">
                     {step.title}
                   </h3>
-                  <p className="mt-2 max-w-[46ch] text-sm leading-relaxed text-body">
+                  <p className="mt-2 max-w-[46ch] type-body text-body">
                     {step.body}
                   </p>
                 </div>
@@ -210,7 +210,7 @@ export default function DownloadsPage() {
         <div className="mx-auto flex max-w-7xl flex-col items-center gap-6 px-6 py-24 text-center">
           <Reveal
             as="h2"
-            className="max-w-[22ch] text-2xl font-medium tracking-tight md:text-3xl"
+            className="max-w-[22ch] type-h3"
           >
             Questions before you install?
           </Reveal>

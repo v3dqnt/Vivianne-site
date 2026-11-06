@@ -29,7 +29,7 @@ export function Reveal({
       return;
     }
 
-    gsap.set(ref.current, { scale: 0.95, transformOrigin: "left center" });
+    gsap.set(ref.current, { scale: 0.95, transformOrigin: "50% 100%" });
 
     const ctx = gsap.context(() => {
       gsap.to(ref.current, {

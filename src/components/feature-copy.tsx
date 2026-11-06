@@ -26,22 +26,22 @@ function Words({ text }: { text: string }) {
 }
 
 /**
- * The copy for one bento card, choreographed as a single timeline when it
- * scrolls into view: the title words rise out of their lines, the badge pops,
- * the sentence fades up, and chips follow. Scrolling back above the card
- * rewinds it, so it plays again on the way down. Reduced motion shows
- * everything in place.
+ * One feature, set as plain centred text under its illustration, and
+ * choreographed as a single timeline when it scrolls into view: the
+ * illustration settles in, the title words rise out of their lines, the badge
+ * pops, and the sentence fades up. Scrolling back above it rewinds it, so it
+ * plays again on the way down. Reduced motion shows everything in place.
  */
 export function FeatureCopy({
+  art,
   status,
   lead,
   rest,
-  chips,
 }: {
+  art?: React.ReactNode;
   status?: string;
   lead: string;
-  rest?: string;
-  chips?: string[];
+  rest: string;
 }) {
   const ref = useRef<HTMLDivElement>(null);
 
@@ -54,24 +54,25 @@ export function FeatureCopy({
     const ctx = gsap.context(() => {
       const tl = gsap.timeline({
         defaults: { ease: "expo.out", duration: 0.9 },
-        scrollTrigger: { trigger: root, start: "top 88%", toggleActions: "play none none reverse" },
+        scrollTrigger: { trigger: root, start: "top 85%", toggleActions: "play none none reverse" },
       });
-      // Not every card has every part, and an empty tween would only warn.
+      // Not every feature has every part, and an empty tween would only warn.
       const step = (name: string, from: gsap.TweenVars, to: gsap.TweenVars, at: gsap.Position) => {
         const targets = q(`[data-ft="${name}"]`);
         if (targets.length) tl.fromTo(targets, from, to, at);
       };
-      step("word", { y: 0, yPercent: 110 }, { yPercent: 0, stagger: 0.04 }, 0);
-      step("badge", { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, duration: 0.6, ease: "back.out(2.2)" }, 0.2);
-      step("rest", { opacity: 0, y: 10 }, { opacity: 1, y: 0 }, 0.2);
-      step("chip", { opacity: 0, y: 8, scale: 0.85 }, { opacity: 1, y: 0, scale: 1, duration: 0.55, ease: "back.out(1.8)", stagger: 0.03 }, 0.35);
+      step("art", { opacity: 0, scale: 0.92 }, { opacity: 1, scale: 1, duration: 1.1 }, 0);
+      step("word", { y: 0, yPercent: 110 }, { yPercent: 0, stagger: 0.04 }, 0.15);
+      step("badge", { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, duration: 0.6, ease: "back.out(2.2)" }, 0.35);
+      step("rest", { opacity: 0, y: 10 }, { opacity: 1, y: 0 }, 0.3);
     }, root);
     return () => ctx.revert();
   }, []);
 
   return (
-    <div ref={ref} data-feature className={rest ? undefined : "flex flex-wrap items-center gap-x-5 gap-y-3"}>
-      <h3 className="flex flex-wrap items-center gap-x-2.5 gap-y-1 text-lg font-medium leading-snug tracking-[-0.015em] text-foreground">
+    <div ref={ref} data-feature className="flex flex-col items-center text-center">
+      {art && <div data-ft="art">{art}</div>}
+      <h3 className="type-h4 mt-6 flex flex-wrap items-center justify-center gap-x-2.5 gap-y-1 text-foreground">
         <span>
           <Words text={lead} />
         </span>
@@ -81,24 +82,9 @@ export function FeatureCopy({
           </span>
         )}
       </h3>
-      {rest && (
-        <p data-ft="rest" className="mt-1.5 text-sm leading-relaxed text-pretty text-muted-foreground">
-          {rest}
-        </p>
-      )}
-      {chips && (
-        <ul className={`flex flex-wrap gap-1 ${rest ? "mt-3" : ""}`} translate="no">
-          {chips.map((chip) => (
-            <li
-              key={chip}
-              data-ft="chip"
-              className="inline-flex h-6 items-center rounded-md border border-border bg-foreground/[0.05] px-2 text-xs text-foreground/80"
-            >
-              {chip}
-            </li>
-          ))}
-        </ul>
-      )}
+      <p data-ft="rest" className="type-body mt-2 max-w-[34ch] text-muted-foreground">
+        {rest}
+      </p>
     </div>
   );
 }

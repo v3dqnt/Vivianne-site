@@ -1,5 +1,5 @@
 // Every Vivianne release, newest first. Shared by the changelog page and
-// the homepage's changelog strip so the two never disagree.
+// the homepage’s changelog strip so the two never disagree.
 
 export type Release = {
   id: string;
@@ -23,17 +23,17 @@ export const releases: Release[] = [
     summary:
       "Viv Instant and the notch step aside for this release while the rest of the app grows: a real command line, stacked panels and Quick access, a keychain vault, cost-aware routing, and workflows.",
     notes: [
-      "`viv`, Vivianne's command line: `viv models ls|rm`, `viv hardware`, `viv load <model>` with GPU, context, port and KV flags, `viv ps`, `viv unload`, `viv logs`, `viv doctor`, `viv chat` and `viv run`. The commands start with no window, so they also work on a machine with no display.",
+      "`viv`, Vivianne’s command line: `viv models ls|rm`, `viv hardware`, `viv load <model>` with GPU, context, port and KV flags, `viv ps`, `viv unload`, `viv logs`, `viv doctor`, `viv chat` and `viv run`. The commands start with no window, so they also work on a machine with no display.",
       "`app run \"<task>\"` runs one task with no window and writes the answer, transcript, steps, seconds and token counts to a JSON file. `--model auto` uses the cost-aware router, and every provider streams through the Rust code. `--headless` starts the app with nothing shown, for an always-on server. Built for benchmarks and scripts.",
       "Stacked panels: the right panel can show its panels one above another as cards, each with its own title, Expand and Close, and a draggable gap that is a real splitter. Anything you open while stacked joins the stack, including panels from mods.",
       "Quick access: the bottom panel opens on one-press tiles for Terminal, Files, Agents, Plan, Preview, Git review, Background tasks, Timeline, Memory and Multiplayer. Mods can add their own tiles, and Customize hides, shows and reorders them.",
-      "Vault: store passwords, cards and secrets in your computer's keychain. The agent sees labels, the site and a hint like \"ending 4242\", never a value, and every fill into a browser field needs your approval, only works on https, and only on the site the entry is bound to.",
+      "Vault: store passwords, cards and secrets in your computer’s keychain. The agent sees labels, the site and a hint like “ending 4242”, never a value, and every fill into a browser field needs your approval, only works on https, and only on the site the entry is bound to.",
       "Cost-aware routing (beta): send background work such as summaries, memory upkeep, routines and read-only exploring to a small model while chat replies and planning stay on your chosen model, with tokens routed and the savings shown. Off by default.",
       "Workflows: chain prompts into steps, let a step stop and ask you first, and trigger a workflow on a schedule or when a file appears in a folder. Each run gets its own thread.",
-      "The agent works in your real browser: when a Chromium browser is connected it researches there instead of falling back to search and fetch, and it can run JavaScript in a page and read the page's console. Settings now lists the Chromium browsers installed here and which have the extension connected.",
+      "The agent works in your real browser: when a Chromium browser is connected it researches there instead of falling back to search and fetch, and it can run JavaScript in a page and read the page’s console. Settings now lists the Chromium browsers installed here and which have the extension connected.",
       "Teammates report in summary cards: one plain sentence and a card with headline numbers, steps, findings, a callout for what needs you, and buttons for the likely next moves. Report-shaped replies in any chat become cards too.",
       "Settings gains NVIDIA and Nebius skill browsing with a scan before install, a cloud embedder for memory, Get models for local inference, dictation and read aloud, interactive answers, and Usage by model. Agent DMs now show the full conversation, plans and steps, and can go back to any message.",
-      "Fixed: agents writing blank PDF and Word files when the model named fields differently, provider rate limits ending an agent's turn silently, OpenAI-compatible hosts reporting zero tokens, and scheduled automations doing nothing (they run again as Workflows).",
+      "Fixed: agents writing blank PDF and Word files when the model named fields differently, provider rate limits ending an agent’s turn silently, OpenAI-compatible hosts reporting zero tokens, and scheduled automations doing nothing (they run again as Workflows).",
       "Viv Instant and the notch are off in this release. Dictation in the message box and the computer-control Stop notch are unchanged; they come back in a later release.",
     ],
   },
@@ -53,7 +53,7 @@ export const releases: Release[] = [
       "Agent DMs accept dropped, pasted and attached files and images, with the model picker next to the message box.",
       "Every agent has its own robot head, and its face shows what it is doing: thinking, searching, working, waiting on you, happy when done. Idle heads are still frames, so a long list costs nothing.",
       "Playbooks are now mods. Existing playbooks convert on first launch, tool playbooks keep working, panel playbooks become mod panels, and the old folder is kept.",
-      "Fixed Windows release builds failing on a clean machine while looking for the speech engine's DLLs. 1.8.1 was never published for Windows; this is that fix.",
+      "Fixed Windows release builds failing on a clean machine while looking for the speech engine’s DLLs. 1.8.1 was never published for Windows; this is that fix.",
     ],
   },
   {
@@ -105,11 +105,11 @@ export const releases: Release[] = [
       "A real persistent terminal, vision with an automatic OCR fallback, goal tracking, and a stalling bug fixed for good.",
     notes: [
       "A full performance pass, front to back: the panel resize drag, diff rendering, and message list no longer do unnecessary work on a long thread; the provider request context is no longer deep-cloned repeatedly on retries; token-budget checks no longer re-walk the whole transcript every turn; and the app now shuts down cleanly instead of leaving terminals, dev servers, and local models running as orphaned processes.",
-      "Persistent terminal tools backed by the same PTY sessions the app's own terminal tabs use: open one, keep it alive across steps (an activated venv, a running dev server), type into it, read back what happened.",
-      "Real vision for images, with an automatic OCR fallback when the selected model can't take image input at all, so a text-only model still gets the content.",
+      "Persistent terminal tools backed by the same PTY sessions the app’s own terminal tabs use: open one, keep it alive across steps (an activated venv, a running dev server), type into it, read back what happened.",
+      "Real vision for images, with an automatic OCR fallback when the selected model can’t take image input at all, so a text-only model still gets the content.",
       "Goal tracking: a durable objective for a long task, separate from the moment-to-moment checklist, restated every turn so it survives compaction.",
-      "Honest partial scans (a capped search says so, instead of quietly looking exhaustive), line-numbered file reads, and a list_tools call to see exactly what's registered right now.",
-      "Fixed the bug behind every turn's chance of a 120-second stall, a 111MB read on every turn, New Chat not actually persisting, and the Review panel's diff view failing on real changes.",
+      "Honest partial scans (a capped search says so, instead of quietly looking exhaustive), line-numbered file reads, and a list_tools call to see exactly what’s registered right now.",
+      "Fixed the bug behind every turn’s chance of a 120-second stall, a 111MB read on every turn, New Chat not actually persisting, and the Review panel’s diff view failing on real changes.",
       "Gesture control moved out into its own standalone app; the dead Rust orchestrator module removed; bash and powershell always stream live output now.",
     ],
   },
@@ -120,12 +120,12 @@ export const releases: Release[] = [
     version: "v1.5",
     status: "Past release",
     summary:
-      "AI Elements across the board, a real browser for web preview and search, and OpenAI's Responses API.",
+      "AI Elements across the board, a real browser for web preview and search, and OpenAI’s Responses API.",
     notes: [
-      "Sources, Plan, Sandbox, Snippet, Web Preview, Queue, Checkpoints, and Confirmations: the full AI Elements set, wired into the agent's own tools.",
-      "Web preview, web search, and web_fetch now route through a real (fingerprint-spoofed) browser process instead of an iframe or plain HTML scrape. It renders sites that block embedding, and launches itself automatically the first time it's needed.",
+      "Sources, Plan, Sandbox, Snippet, Web Preview, Queue, Checkpoints, and Confirmations: the full AI Elements set, wired into the agent’s own tools.",
+      "Web preview, web search, and web_fetch now route through a real (fingerprint-spoofed) browser process instead of an iframe or plain HTML scrape. It renders sites that block embedding, and launches itself automatically the first time it’s needed.",
       "Direct OpenAI calls now speak the Responses API instead of the legacy Chat Completions endpoint, with true incremental streaming and reasoning summaries.",
-      "One-click Docker install for the sandbox tool, and a fixed cron scheduler that was silently treating every automation's local time as UTC.",
+      "One-click Docker install for the sandbox tool, and a fixed cron scheduler that was silently treating every automation’s local time as UTC.",
       "A refreshed welcome screen with the real Vivianne mark, replacing the placeholder CLI command box.",
     ],
   },
