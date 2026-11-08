@@ -100,7 +100,7 @@ export default function DownloadsPage() {
         <Reveal delay={0.1} className="mt-9 flex flex-wrap justify-center gap-3">
           <DownloadLink href={builds[0].href} label="Download for Windows" />
           <DownloadLink
-            href={builds[2].href}
+            href={builds[1].href}
             label="Download for macOS"
             variant="outline"
           />
