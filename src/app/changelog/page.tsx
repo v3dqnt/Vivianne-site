@@ -51,7 +51,7 @@ export default function ChangelogPage() {
         <div className="mx-auto max-w-4xl px-6 pb-24 pt-4">
           <Reveal>
             <h2 className="type-h3 mb-8">Releases</h2>
-            <Accordion type="single" collapsible defaultValue="v1-9-0" className="flex flex-col gap-2.5">
+            <Accordion type="single" collapsible defaultValue="v1-9-1-rdv2" className="flex flex-col gap-2.5">
               {releases.map((release) => (
                 <AccordionItem key={release.id} value={release.id} id={release.id}>
                   <AccordionTrigger>

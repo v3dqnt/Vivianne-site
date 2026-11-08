@@ -15,11 +15,35 @@ export type Release = {
 
 export const releases: Release[] = [
   {
+    id: "v1-9-1-rdv2",
+    date: "2026-11-08",
+    title: "Threads on their own branches, and a new project rail",
+    version: "v1.9.1-rdv2",
+    status: "Current",
+    summary:
+      "The left sidebar gives way to tabs. Every thread is its own agent on its own git branch, a new project rail holds the project, version control and context, and Vivianne has a new logo.",
+    notes: [
+      "Threads and tabs: open as many threads as you like in the tab bar. A new tab is a blank thread; file it under a project, or add a new one, from the project rail. Home groups threads by project, and the left sidebar is gone.",
+      "One branch per thread: in a git project each thread works in its own worktree and branch, cut from where you were. A checkpoint is saved around every turn on a hidden ref, so you can see what a turn changed or roll it back without touching your branch. Merge or remove the branch from the rail.",
+      "A new project rail: one card beside the chat with the project and its folders, version control (commit, create pull request, history, the pull requests a thread opened) and context. Large windows get a wide card; narrow ones stack the sections with dividers.",
+      "Threads can work together: start, message, ask and interrupt other threads, up to five hops deep. A person's message always ends a chain.",
+      "Compaction v2: long conversations are compacted by a call that reuses the cached prefix, so it costs a fraction of before and happens on its own. There is no Compact button.",
+      "Steadier runs: tool arguments are checked first, broken tool calls are repaired, every tool has a time limit, queued messages survive a restart, and a thread stopped by a usage limit picks itself up when the limit lifts. Usage is recorded per thread.",
+      "Errors show up in the chat as yellow checkpoints where the model stopped, instead of a red banner over the composer. The composer is quieter, with two colours and a plus for attachments, and icons are now Solar.",
+      "Rail tabs: Overview, Files, Preview and Terminal, with a sliding selector. Files has a filter and per-language icons; Terminal is a real shell. /goal now lives in the composer.",
+      "Motion: thinking states on the reasoning label, and streamed words fade in.",
+      "For editors and scripts: app acp speaks the Agent Client Protocol, and run_script gets agent(), phase() and log().",
+      "Safer files and processes: one writer per file, edits refused if the file changed, and child processes killed as a tree with credentials withheld.",
+      "A new logo: the Vivianne tesseract, in the app icon, the taskbar and inside the app.",
+      "Pre-release. Windows ships as an installer (NSIS); there is no MSI for this build.",
+    ],
+  },
+  {
     id: "v1-9-0",
     date: "2026-10-25",
     title: "A command line, a vault, and cost-aware routing",
     version: "v1.9.0",
-    status: "Current",
+    status: "Past release",
     summary:
       "Viv Instant and the notch step aside for this release while the rest of the app grows: a real command line, stacked panels and Quick access, a keychain vault, cost-aware routing, and workflows.",
     notes: [

@@ -17,7 +17,7 @@ export const metadata: Metadata = {
 // `latest.json` from — serving installers from a different repo than the one
 // the updater watches is how a manual download and an auto-update end up on
 // different versions.
-const VERSION = "1.9.0";
+const VERSION = "1.9.1-rdv2";
 const RELEASE_TAG = `v${VERSION}`;
 const RELEASE_BASE = `https://github.com/v3dqnt/vivianne-releases/releases/download/${RELEASE_TAG}`;
 
@@ -27,13 +27,6 @@ const builds = [
     detail: "Recommended for most people. NSIS installer.",
     href: `${RELEASE_BASE}/Vivianne_${VERSION}_x64-setup.exe`,
     size: "35 MB",
-    icon: WindowsNewIcon,
-  },
-  {
-    label: "Windows (.msi)",
-    detail: "For managed or enterprise installs.",
-    href: `${RELEASE_BASE}/Vivianne_${VERSION}_x64_en-US.msi`,
-    size: "47 MB",
     icon: WindowsNewIcon,
   },
   {
@@ -49,7 +42,7 @@ const steps = [
   {
     number: "01",
     title: "Download the installer",
-    body: "Grab the .dmg for macOS, or the .exe or .msi for Windows, from the links above to get started.",
+    body: "Grab the .dmg for macOS, or the .exe for Windows, from the links above to get started.",
     image: "/download%20installer.png",
   },
   {
