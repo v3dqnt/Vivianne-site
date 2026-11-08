@@ -68,7 +68,7 @@ export const metadata: Metadata = {
     siteName: "Vivianne",
     title: "Vivianne: the AI agent harness for code, math, and science",
     description,
-    images: [{ url: "/hero-interface.png", width: 1920, height: 1080, alt: "Vivianne mid-task" }],
+    images: [{ url: "/hero-interface.png", width: 1617, height: 1005, alt: "Vivianne mid-task" }],
   },
   twitter: {
     card: "summary_large_image",

@@ -111,9 +111,9 @@ export default function DownloadsPage() {
             <div className="overflow-hidden rounded-md bg-background">
               <Image
                 src="/hero-interface.png"
-                alt="Vivianne’s interface mid-task: reasoning, tool calls, and the Review panel showing real file changes"
-                width={1920}
-                height={1080}
+                alt="Vivianne’s interface mid-task: a thread working through a task, with the project panel beside it"
+                width={1617}
+                height={1005}
                 className="w-full h-auto"
               />
             </div>
