@@ -17,7 +17,7 @@ export const metadata: Metadata = {
 // `latest.json` from — serving installers from a different repo than the one
 // the updater watches is how a manual download and an auto-update end up on
 // different versions.
-const VERSION = "1.9.1-rdv2";
+const VERSION = "1.9.1-rdv2-silent";
 const RELEASE_TAG = `v${VERSION}`;
 const RELEASE_BASE = `https://github.com/v3dqnt/vivianne-releases/releases/download/${RELEASE_TAG}`;
 

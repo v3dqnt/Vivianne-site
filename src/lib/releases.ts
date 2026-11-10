@@ -15,11 +15,28 @@ export type Release = {
 
 export const releases: Release[] = [
   {
+    id: "v1-9-1-rdv2-silent",
+    date: "2026-11-10",
+    title: "No more flashing terminal windows",
+    version: "v1.9.1-rdv2-silent",
+    status: "Current",
+    summary:
+      "On Windows, switching tabs or opening anything git-related no longer makes console windows blink on screen. Coding agents also know the conversation, and the interface is calmer.",
+    notes: [
+      "Fixed: terminal windows flashing for a split second whenever Vivianne ran git or another background command. They now run without a window; terminals you open yourself are unchanged.",
+      "Coding agents (Claude Code, Codex, Gemini CLI and more) are handed the conversation when they join a thread or after a restart, get your MCP servers, and can pick up their own session again.",
+      "Delegate to a coding agent: a thread can hand a self-contained job to an installed coding agent and wait for its report. Stop reaches it.",
+      "Coding-agent usage and cost are recorded per thread, for agents that report them.",
+      "A calmer interface: themed confirm dialogs, errors shown instead of swallowed, text never below 12px, quieter tool rows, and empty states on Home.",
+      "Coding-agent changes were checked by tests and a build, not yet against every agent.",
+    ],
+  },
+  {
     id: "v1-9-1-rdv2",
     date: "2026-11-08",
     title: "Threads on their own branches, and a new project rail",
     version: "v1.9.1-rdv2",
-    status: "Current",
+    status: "Past release",
     summary:
       "The left sidebar gives way to tabs. Every thread is its own agent on its own git branch, a new project rail holds the project, version control and context, and Vivianne has a new logo.",
     notes: [
