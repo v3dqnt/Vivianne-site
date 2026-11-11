@@ -2,15 +2,15 @@ import type { Metadata, Viewport } from "next";
 import "@/lab/index.css";
 
 const description =
-  "0nine Labs (09) is an independent lab experimenting at the edge of AI: faster inference, cheaper compute, smarter models, and what comes after the LLM.";
+  "Nine Superintelligence (09) is an independent lab experimenting at the edge of AI: faster inference, cheaper compute, smarter models, and what comes after the LLM.";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://ninesi.xyz"),
-  title: "0nine Labs — 09",
+  title: "Nine Superintelligence — 09",
   description,
-  icons: { icon: "/0nine-favicon.svg" },
+  icons: { icon: "/nine-favicon.svg" },
   alternates: { canonical: "/" },
-  openGraph: { type: "website", url: "/", siteName: "0nine Labs", title: "0nine Labs — 09", description },
+  openGraph: { type: "website", url: "/", siteName: "Nine Superintelligence", title: "Nine Superintelligence — 09", description },
 };
 
 export const viewport: Viewport = { themeColor: "#05060a" };

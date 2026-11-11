@@ -25,7 +25,7 @@ export function Manifesto() {
   }, [inView, play]);
 
   return (
-    <section ref={ref} className={`manifesto${inView ? ' is-in' : ''}`} aria-label="Why 0nine Labs exists">
+    <section ref={ref} className={`manifesto${inView ? ' is-in' : ''}`} aria-label="Why Nine Superintelligence exists">
       <p className="manifesto__text">
         <span>Frontier models are brilliant</span> <span className="muted">and absurdly expensive to run.</span>{' '}
         <span className="muted">Every token burns GPU hours, energy and money.</span>{' '}
@@ -165,7 +165,7 @@ export function Notebook() {
           <i />
           <i />
           <i />
-          <span>~/0nine-labs</span>
+          <span>~/nine-superintelligence</span>
         </div>
         <div className="terminal__body">
           {lines.map((text, i) => {
@@ -261,7 +261,7 @@ export function Footer() {
     <footer className="footer">
       <div className="footer__brand">
         <span className="nav__mark">09</span>
-        <span>© {new Date().getFullYear()} 0nine Labs</span>
+        <span>© {new Date().getFullYear()} Nine Superintelligence</span>
       </div>
       <div className="footer__controls">
         <button

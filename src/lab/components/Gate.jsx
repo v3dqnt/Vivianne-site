@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { useSfx } from '../sound/SoundProvider';
 
 const BOOT = [
-  'init 0nine.labs',
+  'init nine.superintelligence',
   'loading inference kernels ......... ok',
   'calibrating compute budget ........ ok',
   'searching beyond transformers ..... pending'
@@ -32,7 +32,7 @@ export default function Gate({ onEnter }) {
   };
 
   return (
-    <div className={`gate${leaving ? ' gate--leaving' : ''}`} role="dialog" aria-modal="true" aria-label="Enter 0nine Labs">
+    <div className={`gate${leaving ? ' gate--leaving' : ''}`} role="dialog" aria-modal="true" aria-label="Enter Nine Superintelligence">
       <div className="gate__inner">
         <div className="gate__mark" aria-hidden="true">
           09

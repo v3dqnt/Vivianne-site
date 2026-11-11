@@ -61,7 +61,7 @@ export default function Nav() {
     <header className={`nav${scrolled ? ' nav--scrolled' : ''}`}>
       <a href="#top" className="nav__brand" {...sfx('nav')}>
         <span className="nav__mark">09</span>
-        <span className="nav__name">0nine Labs</span>
+        <span className="nav__name">Nine Superintelligence</span>
       </a>
       <nav className="nav__links" aria-label="Primary">
         {ITEMS.map(([label, href], i) => (
