@@ -21,11 +21,11 @@ export function Footer() {
           </div>
 
           <div className="flex flex-wrap items-center gap-x-6 gap-y-4">
-            <TextLink href="/downloads">Downloads</TextLink>
-            <TextLink href="/changelog">Changelog</TextLink>
-            <TextLink href="/faq">FAQ</TextLink>
-            <TextLink href="/privacy">Privacy</TextLink>
-            <TextLink href="/terms">Terms</TextLink>
+            <TextLink href="/vivianne/downloads">Downloads</TextLink>
+            <TextLink href="/vivianne/changelog">Changelog</TextLink>
+            <TextLink href="/vivianne/faq">FAQ</TextLink>
+            <TextLink href="/vivianne/privacy">Privacy</TextLink>
+            <TextLink href="/vivianne/terms">Terms</TextLink>
             <TextLink href="mailto:hello@vivianne.dev">Contact</TextLink>
           </div>
         </div>

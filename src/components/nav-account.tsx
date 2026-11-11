@@ -33,7 +33,7 @@ export function NavAccount() {
   if (email === null) {
     return (
       <NextLink
-        href="/sign-in"
+        href="/vivianne/sign-in"
         className="text-sm font-medium text-foreground no-underline transition-opacity duration-[var(--dur-fast)] hover:opacity-70"
       >
         Sign in

@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   title: "FAQ",
   description:
     "Answers about Vivianne: what an agent harness is, multiplayer, the vault, supported models, and running local models offline.",
-  alternates: { canonical: "/faq" },
+  alternates: { canonical: "/vivianne/faq" },
 };
 
 const jsonLd = {

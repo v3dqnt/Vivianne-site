@@ -16,8 +16,8 @@ import { Icon } from "@/components/ui/icon";
 gsap.registerPlugin(ScrollTrigger);
 
 const menuLinks = [
-  { href: "/changelog", label: "Changelog" },
-  { href: "/faq", label: "FAQ" },
+  { href: "/vivianne/changelog", label: "Changelog" },
+  { href: "/vivianne/faq", label: "FAQ" },
 ];
 
 export function Nav() {
@@ -69,7 +69,7 @@ export function Nav() {
       } ${scrolled ? "bg-background/95" : ""}`}
     >
       <div className="mx-auto flex h-16 w-full max-w-7xl items-center justify-between gap-3 px-6">
-        <NextLink href="/" className="no-underline">
+        <NextLink href="/vivianne" className="no-underline">
           <span className="flex items-center gap-2.5">
             <Logo size={36} />
             <span className="text-[15px] font-medium tracking-tight">Vivianne</span>
@@ -93,7 +93,7 @@ export function Nav() {
             <NavAccount />
           </span>
           <SoundToggle />
-          <NextLink href="/downloads" className={buttonVariants({ size: "sm" })}>
+          <NextLink href="/vivianne/downloads" className={buttonVariants({ size: "sm" })}>
             Download
           </NextLink>
 

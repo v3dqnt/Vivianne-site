@@ -182,7 +182,7 @@ export default function Home() {
               assistants that keep working. Any model, your keys.
             </Reveal>
             <Reveal delay={0.24} className="mt-10 flex flex-wrap items-center gap-3">
-              <CtaLink href="/downloads" label="Download for Windows & macOS" />
+              <CtaLink href="/vivianne/downloads" label="Download for Windows & macOS" />
               <NextLink href="#features" className={buttonVariants({ variant: "outline", size: "lg" })}>
                 Explore the Features
                 <Icon icon={ArrowDown01Icon} size={16} />
@@ -240,7 +240,7 @@ export default function Home() {
             <Reveal as="h2" className="type-h2">
               What’s new
             </Reveal>
-            <ActionLink href="/changelog">
+            <ActionLink href="/vivianne/changelog">
               Full Changelog
               <Icon icon={ArrowRight02Icon} size={16} />
             </ActionLink>
@@ -248,7 +248,7 @@ export default function Home() {
 
           <div className="mt-10 grid grid-cols-1 gap-10 lg:grid-cols-[minmax(0,3fr)_minmax(0,2fr)] lg:gap-14">
             <Reveal>
-              <NextLink href="/changelog" className="block no-underline">
+              <NextLink href="/vivianne/changelog" className="block no-underline">
                 <MetalCard>
                   <div className="flex min-h-56 flex-col p-4 md:p-6">
                     <p className="type-small text-muted-foreground tabular-nums">
@@ -270,7 +270,7 @@ export default function Home() {
               {earlier.map((r, i) => (
                 <li key={r.id}>
                   <Reveal delay={0.08 * (i + 1)}>
-                    <NextLink href="/changelog" className="group block no-underline">
+                    <NextLink href="/vivianne/changelog" className="group block no-underline">
                       <span className="type-small block text-muted-foreground tabular-nums">
                         {r.version}, {formatReleaseDate(r.date)}
                       </span>
@@ -325,7 +325,7 @@ export default function Home() {
             Windows and macOS today. Linux is on the way.
           </Reveal>
           <Reveal delay={0.2} className="mt-9">
-            <CtaLink href="/downloads" label="Download for Windows & macOS" />
+            <CtaLink href="/vivianne/downloads" label="Download for Windows & macOS" />
           </Reveal>
         </div>
       </section>

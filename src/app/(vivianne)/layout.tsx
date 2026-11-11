@@ -2,14 +2,14 @@ import type { Metadata, Viewport } from "next";
 import { Geist_Mono } from "next/font/google";
 import localFont from "next/font/local";
 import "lenis/dist/lenis.css";
-import "./globals.css";
+import "../globals.css";
 import { Nav } from "@/components/nav";
 import { SiteSound } from "@/components/site-sound";
 import { Footer } from "@/components/footer";
 import { SmoothScroll } from "@/components/smooth-scroll";
 
 const generalSans = localFont({
-  src: "./fonts/GeneralSans-Variable.woff2",
+  src: "../fonts/GeneralSans-Variable.woff2",
   weight: "200 700",
   variable: "--font-general-sans",
   display: "swap",
@@ -25,7 +25,7 @@ const description =
   "Vivianne is a desktop AI agent for code, math, and science: its own agent with any model or a local one, coding agents like Claude Code over the Agent Client Protocol, always-on assistants, and computer control.";
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://vivianne.dev"),
+  metadataBase: new URL("https://ninesi.xyz"),
   title: {
     default: "Vivianne: the AI agent harness for code, math, and science",
     template: "%s | Vivianne",
@@ -61,10 +61,10 @@ export const metadata: Metadata = {
     "Claude Code alternative",
     "OpenAI compatible",
   ],
-  alternates: { canonical: "/" },
+  alternates: { canonical: "/vivianne" },
   openGraph: {
     type: "website",
-    url: "/",
+    url: "/vivianne",
     siteName: "Vivianne",
     title: "Vivianne: the AI agent harness for code, math, and science",
     description,

@@ -65,7 +65,7 @@ export default function TermsPage() {
       <LegalSection heading="6. Privacy">
         <p>
           Your use of Vivianne is also subject to our{" "}
-          <Link href="/privacy" className="underline">
+          <Link href="/vivianne/privacy" className="underline">
             Privacy Policy
           </Link>
           , which is incorporated into these terms by reference.
