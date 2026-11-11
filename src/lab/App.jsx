@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import Gate from './components/Gate';
 import Nav from './components/Nav';
 import Hero from './components/Hero';
-import { Contact, Footer, Manifesto, Notebook, Principles, Research } from './components/Sections';
+import { Contact, Footer, Manifesto, Product, Research } from './components/Sections';
 
 export default function App() {
   const [entered, setEntered] = useState(false);
@@ -21,8 +21,7 @@ export default function App() {
           <Hero live={entered} />
           <Manifesto />
           <Research />
-          <Notebook />
-          <Principles />
+          <Product />
           <Contact />
         </main>
         <Footer />

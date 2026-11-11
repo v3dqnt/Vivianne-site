@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import ScrambleText from './ScrambleText';
 import { GlassButton, GlassCard } from './Glass';
 import { SoundToggle } from './Nav';
-import { prefersReducedMotion, useInView } from '../hooks';
+import { useInView } from '../hooks';
 import { useSfx, useSfxProps } from '../sound/SoundProvider';
 import { LINKS } from '../config';
 
@@ -111,119 +111,37 @@ export function Research() {
   );
 }
 
-const QUESTIONS = [
-  'how small can a model get before reasoning breaks?',
-  'can a 4-bit model match its 16-bit parent on real work?',
-  'what does one genuinely useful answer actually cost?',
-  'can draft-and-verify decoding run 3x faster on a consumer GPU?',
-  'can state-space models replace attention at scale?',
-  'what learns more like a brain and less like a lookup table?'
-];
-
-const COMMAND = '09 --list open-questions';
-
-export function Notebook() {
-  const [ref, inView] = useInView({ threshold: 0.45 });
-  const { play } = useSfx();
-  const lines = [COMMAND, ...QUESTIONS];
-  const [progress, setProgress] = useState({ line: 0, char: 0 });
-
-  useEffect(() => {
-    if (!inView) return undefined;
-    if (prefersReducedMotion()) {
-      setProgress({ line: lines.length, char: 0 });
-      return undefined;
-    }
-    let line = 0;
-    let char = 0;
-    let timer = 0;
-    const step = () => {
-      if (line >= lines.length) return;
-      if (char < lines[line].length) {
-        char += 1;
-        if (lines[line][char - 1] !== ' ') play('key');
-        timer = setTimeout(step, line === 0 ? 55 : 22 + Math.random() * 26);
-      } else {
-        play(line === 0 ? 'enter' : 'data');
-        line += 1;
-        char = 0;
-        timer = setTimeout(step, line === 1 ? 420 : 260);
-      }
-      setProgress({ line, char });
-    };
-    timer = setTimeout(step, 500);
-    return () => clearTimeout(timer);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [inView]);
-
+export function Product() {
+  const [ref, inView] = useInView({ threshold: 0.2 });
+  const sfx = useSfxProps();
   return (
-    <section id="notebook" ref={ref} className={`section notebook${inView ? ' is-in' : ''}`}>
-      <SectionHead index="02" label="Lab notebook" title="Questions on the bench." inView={inView} />
-      <div className="terminal" role="log" aria-label="Open research questions">
-        <GlassCard className="glass-card--terminal" borderRadius={16} distortionScale={-110}>
-        <div className="terminal__bar" aria-hidden="true">
-          <i />
-          <i />
-          <i />
-          <span>~/nine-superintelligence</span>
+    <section id="vivianne" ref={ref} className={`section product${inView ? ' is-in' : ''}`}>
+      <SectionHead index="02" label="Our first product" title="Meet Vivianne." inView={inView} />
+      <div className="product__grid">
+        <div className="product__copy">
+          <p className="product__lede">
+            Vivianne is a desktop AI agent for code, math and science. It runs its own agent with any model or a local one,
+            runs coding agents like Claude Code over the Agent Client Protocol, and keeps always-on assistants working while
+            you are away.
+          </p>
+          <ul className="product__points">
+            <li>Any model: your own keys, or one running on your machine</li>
+            <li>Claude Code and other coding agents, inside one app</li>
+            <li>24/7 assistants, plus computer control</li>
+          </ul>
+          <div className="product__actions">
+            <a className="btn btn--primary btn--lg" href="/vivianne" {...sfx('click')}>
+              Explore Vivianne
+            </a>
+            <GlassButton size="lg" href="/vivianne/downloads" {...sfx('link')}>
+              Download
+            </GlassButton>
+          </div>
         </div>
-        <div className="terminal__body">
-          {lines.map((text, i) => {
-            if (i > progress.line) return null;
-            const shown = i < progress.line ? text : text.slice(0, progress.char);
-            const typing = i === progress.line;
-            return (
-              <p key={text} className={i === 0 ? 'terminal__cmd' : 'terminal__q'}>
-                {i === 0 ? <span className="terminal__prompt">$</span> : <span className="terminal__id">q.{String(i).padStart(2, '0')}</span>}
-                <span>
-                  {shown}
-                  {typing && <span className="caret" aria-hidden="true" />}
-                </span>
-              </p>
-            );
-          })}
-          {progress.line >= lines.length && (
-            <p className="terminal__cmd">
-              <span className="terminal__prompt">$</span>
-              <span>
-                <span className="caret" aria-hidden="true" />
-              </span>
-            </p>
-          )}
-        </div>
-        </GlassCard>
+        <a className="product__shot" href="/vivianne" aria-label="Explore Vivianne" {...sfx('click')}>
+          <img src="/hero-interface.png" width="1617" height="1005" loading="lazy" alt="Vivianne working through a task" />
+        </a>
       </div>
-      {/* Screen readers get the full list straight away. */}
-      <ul className="sr-only">
-        {QUESTIONS.map(q => (
-          <li key={q}>{q}</li>
-        ))}
-      </ul>
-    </section>
-  );
-}
-
-const PRINCIPLES = [
-  ['Measure in dollars.', 'Benchmarks are half the story. Every result ships with what it costs to run.'],
-  ['Small is a feature.', 'A model that fits on a laptop changes who gets to use intelligence.'],
-  ['Build in public.', 'Experiments, failures included, get written up and shared.']
-];
-
-export function Principles() {
-  const [ref, inView] = useInView({ threshold: 0.3 });
-  const { play } = useSfx();
-  return (
-    <section id="principles" ref={ref} className={`section principles${inView ? ' is-in' : ''}`}>
-      <SectionHead index="03" label="Principles" title="How the lab works." inView={inView} />
-      <ol className="principles__list">
-        {PRINCIPLES.map(([title, body], i) => (
-          <li key={title} style={{ transitionDelay: `${i * 110}ms` }} onPointerEnter={() => play('hover')}>
-            <span className="principles__n">0{i + 1}</span>
-            <h3>{title}</h3>
-            <p>{body}</p>
-          </li>
-        ))}
-      </ol>
     </section>
   );
 }
@@ -234,7 +152,7 @@ export function Contact() {
   return (
     <section id="contact" ref={ref} className={`section contact${inView ? ' is-in' : ''}`}>
       <p className="section-head__label">
-        <span>04</span> Contact
+        <span>03</span> Contact
       </p>
       <ScrambleText as="h2" className="contact__title" text="Come break things with us." play={inView} cue="decode" duration={1000} />
       <p className="contact__lede">

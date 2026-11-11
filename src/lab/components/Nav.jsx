@@ -4,8 +4,7 @@ import GlassSurface from './GlassSurface';
 
 const ITEMS = [
   ['Research', '#research'],
-  ['Notebook', '#notebook'],
-  ['Principles', '#principles'],
+  ['Vivianne', '#vivianne'],
   ['Contact', '#contact']
 ];
 
