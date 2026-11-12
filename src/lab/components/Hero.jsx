@@ -48,7 +48,7 @@ export default function Hero({ live }) {
       <div className="hero__field">
         {live && (
           <GradientASCII
-            colors={['#3f3f46', '#fafafa', '#d4d4d8', '#71717a']}
+            colors={['#1e3fd8', '#f6f8ff', '#a5d8ff', '#38bdf8']}
             shape="horizon"
             characters=" =+xX0S8#@"
             cellSize={16}

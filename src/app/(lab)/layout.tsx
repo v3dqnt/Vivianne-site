@@ -13,7 +13,7 @@ export const metadata: Metadata = {
   openGraph: { type: "website", url: "/", siteName: "Nine Superintelligence", title: "Nine Superintelligence", description },
 };
 
-export const viewport: Viewport = { themeColor: "#0a0a0b" };
+export const viewport: Viewport = { themeColor: "#05060a" };
 
 export default function LabLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
