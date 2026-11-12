@@ -22,23 +22,3 @@ export function GlassButton({ size = 'md', className = '', children, ...linkProp
     </GlassSurface>
   );
 }
-
-export function GlassCard({ className = '', children, ...rest }) {
-  return (
-    <GlassSurface
-      width="100%"
-      height="100%"
-      borderRadius={20}
-      borderWidth={0.05}
-      distortionScale={-140}
-      blur={10}
-      backgroundOpacity={0.42}
-      saturation={1.2}
-      refraction={false}
-      className={`glass-card ${className}`}
-      {...rest}
-    >
-      {children}
-    </GlassSurface>
-  );
-}

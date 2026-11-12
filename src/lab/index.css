@@ -518,24 +518,22 @@ p {
 
 /* ---------- research ---------- */
 
-/* Dot grid + soft glows give the glass something to bend. */
-.research,
-.notebook {
-  position: relative;
-  background-image:
-    radial-gradient(38% 48% at 18% 72%, rgba(30, 63, 216, 0.3), transparent 70%),
-    radial-gradient(32% 42% at 86% 38%, rgba(56, 189, 248, 0.16), transparent 70%),
-    radial-gradient(rgba(165, 216, 255, 0.16) 1px, transparent 1.3px);
-  background-size: auto, auto, 22px 22px;
-}
-
+/* Columns on the page itself: no cards, no backdrop of its own. */
 .tracks {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 14px;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  column-gap: clamp(24px, 3vw, 48px);
+  row-gap: 64px;
 }
 
+/* Every column has the same rows (name, claim, body, tags, art), and subgrid
+   lines them up across the row so the claims and the art sit level. */
 .track {
+  display: grid;
+  grid-row: span 5;
+  grid-template-rows: subgrid;
+  row-gap: 14px;
+  align-content: start;
   opacity: 0;
   transform: translateY(24px);
   transition:
@@ -548,86 +546,39 @@ p {
   transform: none;
 }
 
-.glass-card .glass-surface__content {
-  display: flex;
-  flex-direction: column;
-  align-items: stretch;
-  justify-content: flex-start;
-  gap: 14px;
-  padding: 28px 24px 32px;
-}
-
-.track .glass-card {
-  transition: transform 0.45s var(--ease);
-}
-
-.track .glass-card::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  background: radial-gradient(120% 60% at 50% 110%, rgba(30, 63, 216, 0.4), transparent 70%);
-  opacity: 0;
-  transition: opacity 0.4s var(--ease);
-  pointer-events: none;
-}
-
-/* A big card over a static dot grid has nothing worth blurring, and a backdrop
-   filter is repainted behind the card on every scroll frame. */
-.glass-card.glass-surface--fallback {
-  -webkit-backdrop-filter: none;
-  backdrop-filter: none;
-  background: rgba(9, 11, 19, 0.86);
-}
-
-.track:hover .glass-card {
-  transform: translateY(-4px);
-}
-
-.track:hover .glass-card::before {
-  opacity: 1;
-}
-
-.track__top {
-  display: flex;
-  justify-content: space-between;
-  align-items: baseline;
-  padding-bottom: 40px;
-}
-
 .track__name {
   font: 400 12px/1 var(--mono);
   text-transform: uppercase;
   letter-spacing: 0.12em;
-  color: var(--muted);
+  color: var(--accent);
 }
 
 .track h3 {
-  font-size: 22px;
+  font-size: clamp(24px, 2.3vw, 32px);
   font-weight: 500;
-  letter-spacing: -0.02em;
+  line-height: 1.1;
+  letter-spacing: -0.025em;
 }
 
-.track p {
+.track__body {
+  max-width: 38ch;
+  color: #c4cadb;
+  font-size: 16px;
+}
+
+.track__tags {
+  font: 400 12.5px/1.6 var(--mono);
   color: var(--muted);
-  font-size: 15px;
 }
 
-.track ul {
-  list-style: none;
-  margin: 8px 0 0;
-  padding: 0;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
-}
-
-.track li {
-  padding: 5px 10px;
-  border: 1px solid var(--line);
-  border-radius: 999px;
-  font: 400 11.5px/1.3 var(--mono);
-  color: #b3bbcf;
+.track__art {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1;
+  object-fit: cover;
+  margin-top: 18px;
+  border-radius: 6px;
 }
 
 /* ---------- product ---------- */
@@ -821,9 +772,6 @@ p {
 @media (max-width: 600px) {
   .tracks {
     grid-template-columns: 1fr;
-  }
-  .track__top {
-    padding-bottom: 24px;
   }
   .sound-toggle__label {
     display: none;

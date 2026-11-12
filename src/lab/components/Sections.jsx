@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import ScrambleText from './ScrambleText';
-import { GlassButton, GlassCard } from './Glass';
+import { GlassButton } from './Glass';
 import { SoundToggle } from './Nav';
 import { useInView } from '../hooks';
 import { useSfx, useSfxProps } from '../sound/SoundProvider';
@@ -62,26 +62,17 @@ const TRACKS = [
   }
 ];
 
-function TrackCard({ track, delay, inView }) {
+// One column per track: what it is, the claim, why, what we try. A track
+// with an `image` (a file in /public/lab) shows it at the foot of its column.
+function Track({ track, delay }) {
   const { play } = useSfx();
   return (
-    <article
-      className="track"
-      style={{ transitionDelay: `${delay}ms` }}
-      onPointerEnter={() => play('glitch')}
-    >
-      <GlassCard>
-        <div className="track__top">
-          <span className="track__name">{track.name}</span>
-        </div>
-        <h3>{track.line}</h3>
-        <p>{track.body}</p>
-        <ul>
-          {track.tags.map(tag => (
-            <li key={tag}>{tag}</li>
-          ))}
-        </ul>
-      </GlassCard>
+    <article className="track" style={{ transitionDelay: `${delay}ms` }} onPointerEnter={() => play('glitch')}>
+      <p className="track__name">{track.name}</p>
+      <h3>{track.line}</h3>
+      <p className="track__body">{track.body}</p>
+      <p className="track__tags">{track.tags.join(', ')}</p>
+      {track.image && <img className="track__art" src={track.image} alt="" width="1024" height="1024" loading="lazy" />}
     </article>
   );
 }
@@ -93,7 +84,7 @@ export function Research() {
       <SectionHead title="Four bets on cheaper intelligence." inView={inView} />
       <div className="tracks">
         {TRACKS.map((track, i) => (
-          <TrackCard key={track.name} track={track} delay={i * 90} inView={inView} />
+          <Track key={track.name} track={track} delay={i * 90} />
         ))}
       </div>
     </section>
