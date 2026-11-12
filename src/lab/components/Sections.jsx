@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import ScrambleText from './ScrambleText';
 import { GlassButton, GlassCard } from './Glass';
 import { SoundToggle } from './Nav';
@@ -6,12 +6,10 @@ import { useInView } from '../hooks';
 import { useSfx, useSfxProps } from '../sound/SoundProvider';
 import { LINKS } from '../config';
 
-function SectionHead({ index, label, title, inView }) {
+function SectionHead({ label, title, inView }) {
   return (
     <div className="section-head">
-      <p className="section-head__label">
-        <span>{index}</span> {label}
-      </p>
+      {label && <p className="section-head__label">{label}</p>}
       <ScrambleText as="h2" text={title} play={inView} cue="data" duration={800} />
     </div>
   );
@@ -39,28 +37,24 @@ export function Manifesto() {
 
 const TRACKS = [
   {
-    n: '01',
     name: 'Inference',
     line: 'Squeeze every token.',
     body: 'Make the same model answer faster, on less hardware, without losing quality.',
     tags: ['Speculative decoding', 'Quantization', 'KV-cache compression', 'Batching & scheduling']
   },
   {
-    n: '02',
     name: 'Compute',
     line: 'Spend less per thought.',
     body: 'Treat cost-per-useful-answer as the metric that matters, and drive it down.',
     tags: ['Cost-per-token benchmarks', 'Distillation', 'Sparse & MoE routing', 'Consumer & edge GPUs']
   },
   {
-    n: '03',
     name: 'Intelligence',
     line: 'More reasoning per parameter.',
     body: 'Get bigger-model behaviour out of smaller models through better data, training and test-time thinking.',
     tags: ['Small-model reasoning', 'Test-time compute', 'Data quality', 'Honest evals']
   },
   {
-    n: '04',
     name: 'Beyond LLMs',
     line: 'Find what comes next.',
     body: 'Transformers may not be the end state. We prototype architectures that could do more with far less.',
@@ -70,19 +64,14 @@ const TRACKS = [
 
 function TrackCard({ track, delay, inView }) {
   const { play } = useSfx();
-  const [hot, setHot] = useState(0);
   return (
     <article
       className="track"
       style={{ transitionDelay: `${delay}ms` }}
-      onPointerEnter={() => {
-        play('glitch');
-        setHot(h => h + 1);
-      }}
+      onPointerEnter={() => play('glitch')}
     >
       <GlassCard>
         <div className="track__top">
-          <ScrambleText key={hot} text={track.n} play={inView} className="track__n" duration={420} />
           <span className="track__name">{track.name}</span>
         </div>
         <h3>{track.line}</h3>
@@ -101,10 +90,10 @@ export function Research() {
   const [ref, inView] = useInView({ threshold: 0.2 });
   return (
     <section id="research" ref={ref} className={`section research${inView ? ' is-in' : ''}`}>
-      <SectionHead index="01" label="Research tracks" title="Four bets on cheaper intelligence." inView={inView} />
+      <SectionHead title="Four bets on cheaper intelligence." inView={inView} />
       <div className="tracks">
         {TRACKS.map((track, i) => (
-          <TrackCard key={track.n} track={track} delay={i * 90} inView={inView} />
+          <TrackCard key={track.name} track={track} delay={i * 90} inView={inView} />
         ))}
       </div>
     </section>
@@ -116,7 +105,7 @@ export function Product() {
   const sfx = useSfxProps();
   return (
     <section id="vivianne" ref={ref} className={`section product${inView ? ' is-in' : ''}`}>
-      <SectionHead index="02" label="Our first product" title="Meet Vivianne." inView={inView} />
+      <SectionHead label="Our first product" title="Meet Vivianne." inView={inView} />
       <div className="product__grid">
         <div className="product__copy">
           <p className="product__lede">
@@ -151,9 +140,6 @@ export function Contact() {
   const sfx = useSfxProps();
   return (
     <section id="contact" ref={ref} className={`section contact${inView ? ' is-in' : ''}`}>
-      <p className="section-head__label">
-        <span>03</span> Contact
-      </p>
       <ScrambleText as="h2" className="contact__title" text="Come break things with us." play={inView} cue="decode" duration={1000} />
       <p className="contact__lede">
         Researchers, engineers and the curious: if you care about making AI cheaper and smarter, say hello.

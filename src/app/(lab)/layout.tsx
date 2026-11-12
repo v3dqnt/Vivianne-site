@@ -6,14 +6,14 @@ const description =
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://ninesi.xyz"),
-  title: "Nine Superintelligence — 09",
+  title: "Nine Superintelligence",
   description,
   icons: { icon: "/nine-favicon.svg" },
   alternates: { canonical: "/" },
-  openGraph: { type: "website", url: "/", siteName: "Nine Superintelligence", title: "Nine Superintelligence — 09", description },
+  openGraph: { type: "website", url: "/", siteName: "Nine Superintelligence", title: "Nine Superintelligence", description },
 };
 
-export const viewport: Viewport = { themeColor: "#05060a" };
+export const viewport: Viewport = { themeColor: "#0a0a0b" };
 
 export default function LabLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
