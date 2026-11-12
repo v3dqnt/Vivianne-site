@@ -34,6 +34,7 @@ export function GlassCard({ className = '', children, ...rest }) {
       blur={10}
       backgroundOpacity={0.42}
       saturation={1.2}
+      refraction={false}
       className={`glass-card ${className}`}
       {...rest}
     >

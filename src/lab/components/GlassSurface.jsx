@@ -710,6 +710,12 @@ const GlassSurface = ({
       return false;
     }
 
+    // The refraction is an SVG filter run again behind the surface on every scroll frame:
+    // too much for a phone or a touch screen, so those get the plain frosted look.
+    if (window.matchMedia?.('(pointer: coarse), (max-width: 900px), (prefers-reduced-motion: reduce)').matches) {
+      return false;
+    }
+
     const div = document.createElement('div');
     div.style.backdropFilter = `url(#${filterId})`;
 

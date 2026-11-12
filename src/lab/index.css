@@ -216,14 +216,16 @@ p {
   background: transparent;
 }
 
-/* ---------- gate ---------- */
+/* ---------- loader ---------- */
 
-.gate {
+.loader {
   position: fixed;
   inset: 0;
   z-index: 100;
   display: grid;
-  place-items: center;
+  place-content: center;
+  justify-items: center;
+  gap: 32px;
   padding: var(--gutter);
   background: var(--bg);
   transition:
@@ -231,64 +233,35 @@ p {
     filter 0.7s var(--ease);
 }
 
-.gate--leaving {
+.loader--leaving {
   opacity: 0;
   filter: blur(12px);
   pointer-events: none;
 }
 
-.gate__inner {
-  width: min(520px, 100%);
-}
-
-.gate__mark {
+.loader__mark {
   font: 600 clamp(88px, 22vw, 168px) / 0.85 var(--mono);
   letter-spacing: -0.06em;
+  font-variant-numeric: tabular-nums;
   background: linear-gradient(180deg, var(--text) 10%, var(--deep) 140%);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
-  margin-bottom: 32px;
 }
 
-.gate__boot {
-  margin: 0 0 28px;
-  font: 400 12.5px/1.9 var(--mono);
-  color: var(--muted);
-  white-space: pre-wrap;
+.loader__bar {
+  width: min(220px, 50vw);
+  height: 1px;
+  background: var(--line-strong);
+  overflow: hidden;
 }
 
-.gate__boot span {
+.loader__bar i {
   display: block;
-  opacity: 0;
-  animation: boot-line 0.4s var(--ease) forwards;
-}
-
-.gate__boot i {
-  font-style: normal;
-  color: var(--accent);
-}
-
-@keyframes boot-line {
-  from {
-    opacity: 0;
-    transform: translateY(4px);
-  }
-  to {
-    opacity: 1;
-    transform: none;
-  }
-}
-
-.gate__lede {
-  color: var(--text);
-  margin-bottom: 20px;
-}
-
-.gate__actions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
+  height: 100%;
+  background: var(--accent);
+  transform-origin: left;
+  transition: transform 0.25s var(--ease);
 }
 
 /* ---------- site ---------- */
@@ -588,6 +561,14 @@ p {
   opacity: 0;
   transition: opacity 0.4s var(--ease);
   pointer-events: none;
+}
+
+/* A big card over a static dot grid has nothing worth blurring, and a backdrop
+   filter is repainted behind the card on every scroll frame. */
+.glass-card.glass-surface--fallback {
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+  background: rgba(9, 11, 19, 0.86);
 }
 
 .track:hover .glass-card {

@@ -1,5 +1,5 @@
-import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState } from 'react';
-import { playSound, preloadSound, renderSound } from '../components/sounds/react-bits-sound';
+import { createContext, useCallback, useContext, useMemo, useRef, useState } from 'react';
+import { playSound, preloadSound } from '../components/sounds/react-bits-sound';
 import nib from '../components/sounds/nib';
 import pebble from '../components/sounds/pebble';
 import tink from '../components/sounds/tink';
@@ -23,7 +23,6 @@ import chiclet from '../components/sounds/chiclet';
 import enter from '../components/sounds/enter';
 import counter from '../components/sounds/counter';
 import dispatch from '../components/sounds/dispatch';
-import nebula from '../components/sounds/nebula';
 
 // Named cues used across the site. Volumes are in dB relative to each sound's own level.
 const CUES = {
@@ -55,109 +54,13 @@ const CUES = {
 // Throttle windows per cue so fast pointer movement doesn't machine-gun the same sound.
 const THROTTLE = { hover: 70, key: 35, glitch: 120, zap: 180, section: 400 };
 
-const STORAGE_KEY = '09-sound';
-const AMBIENT_LOOP = 7; // seconds between pad starts; the pad's own 2.5s fades cross over
-const AMBIENT_GAIN = 0.32;
-
 const SoundContext = createContext(null);
 
-const readPref = () => {
-  try {
-    return localStorage.getItem(STORAGE_KEY);
-  } catch {
-    return null;
-  }
-};
-
-const writePref = value => {
-  try {
-    localStorage.setItem(STORAGE_KEY, value);
-  } catch {
-    /* storage unavailable, preference just won't persist */
-  }
-};
-
-// The ambient bed runs on its own AudioContext so it can be faded and stopped,
-// which the engine's fire-and-forget playSound() can't do.
-function useAmbient(active) {
-  const ref = useRef({ context: null, master: null, buffer: null, timer: 0, sources: new Set() });
-
-  useEffect(() => {
-    const state = ref.current;
-    if (!active) {
-      if (state.master && state.context) {
-        const now = state.context.currentTime;
-        state.master.gain.cancelScheduledValues(now);
-        state.master.gain.setTargetAtTime(0, now, 0.4);
-      }
-      clearInterval(state.timer);
-      state.timer = 0;
-      return undefined;
-    }
-
-    let cancelled = false;
-    const start = async () => {
-      if (!state.context) {
-        const Context = window.AudioContext || window.webkitAudioContext;
-        state.context = new Context();
-        state.master = state.context.createGain();
-        state.master.gain.value = 0;
-        state.master.connect(state.context.destination);
-      }
-      if (state.context.state === 'suspended') await state.context.resume();
-      if (!state.buffer) state.buffer = await renderSound(nebula, {}, { sampleRate: state.context.sampleRate });
-      if (cancelled) return;
-
-      const spawn = () => {
-        const source = state.context.createBufferSource();
-        source.buffer = state.buffer;
-        source.detune.value = (Math.random() * 2 - 1) * 30;
-        source.connect(state.master);
-        source.onended = () => state.sources.delete(source);
-        state.sources.add(source);
-        source.start();
-      };
-      const now = state.context.currentTime;
-      state.master.gain.cancelScheduledValues(now);
-      state.master.gain.setTargetAtTime(AMBIENT_GAIN, now, 1.2);
-      spawn();
-      state.timer = setInterval(spawn, AMBIENT_LOOP * 1000);
-    };
-    start().catch(() => {});
-
-    return () => {
-      cancelled = true;
-      clearInterval(state.timer);
-      state.timer = 0;
-    };
-  }, [active]);
-
-  useEffect(
-    () => () => {
-      const state = ref.current;
-      clearInterval(state.timer);
-      state.sources.forEach(source => {
-        try {
-          source.stop();
-        } catch {
-          /* already stopped */
-        }
-      });
-      state.context?.close();
-    },
-    []
-  );
-}
-
 export function SoundProvider({ children }) {
-  // null = visitor hasn't chosen yet (gate is showing)
-  const [enabled, setEnabled] = useState(null);
-  const [ambient, setAmbient] = useState(true);
-  const enabledRef = useRef(enabled);
-  enabledRef.current = enabled;
+  // Sound starts off: browsers only allow audio after a gesture, and the visitor turns it on from the nav.
+  const [enabled, setEnabled] = useState(false);
+  const enabledRef = useRef(false);
   const lastPlayed = useRef({});
-
-  useAmbient(enabled === true && ambient);
 
   const play = useCallback(name => {
     if (!enabledRef.current) return;
@@ -172,17 +75,8 @@ export function SoundProvider({ children }) {
     playSound(cue.recipe, cue.tune).catch(() => {});
   }, []);
 
-  // Called from the entry gate, inside a user gesture, so audio is allowed to start.
-  const choose = useCallback(withSound => {
-    enabledRef.current = withSound;
-    setEnabled(withSound);
-    writePref(withSound ? 'on' : 'off');
-    if (withSound) Object.values(CUES).forEach(cue => preloadSound(cue.recipe, cue.tune));
-  }, []);
-
   const toggle = useCallback(() => {
     const next = !enabledRef.current;
-    writePref(next ? 'on' : 'off');
     if (next) Object.values(CUES).forEach(cue => preloadSound(cue.recipe, cue.tune));
     const cue = next ? CUES.on : CUES.off;
     playSound(cue.recipe, cue.tune).catch(() => {});
@@ -190,19 +84,7 @@ export function SoundProvider({ children }) {
     setEnabled(next);
   }, []);
 
-  const value = useMemo(
-    () => ({
-      enabled: enabled === true,
-      chosen: enabled !== null,
-      savedPref: readPref(),
-      ambient,
-      setAmbient,
-      play,
-      choose,
-      toggle
-    }),
-    [enabled, ambient, play, choose, toggle]
-  );
+  const value = useMemo(() => ({ enabled, play, toggle }), [enabled, play, toggle]);
 
   return <SoundContext.Provider value={value}>{children}</SoundContext.Provider>;
 }

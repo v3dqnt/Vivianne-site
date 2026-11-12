@@ -174,7 +174,6 @@ export function Contact() {
 }
 
 export function Footer() {
-  const { enabled, ambient, setAmbient, play } = useSfx();
   return (
     <footer className="footer">
       <div className="footer__brand">
@@ -182,18 +181,6 @@ export function Footer() {
         <span>© {new Date().getFullYear()} Nine Superintelligence</span>
       </div>
       <div className="footer__controls">
-        <button
-          className="chip"
-          disabled={!enabled}
-          aria-pressed={ambient}
-          onClick={() => {
-            play(ambient ? 'off' : 'on');
-            setAmbient(!ambient);
-          }}
-          onPointerEnter={() => play('hover')}
-        >
-          Ambient pad: {ambient ? 'on' : 'off'}
-        </button>
         <SoundToggle compact />
       </div>
       <p className="footer__credit">
