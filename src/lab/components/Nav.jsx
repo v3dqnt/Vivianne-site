@@ -63,9 +63,8 @@ export default function Nav() {
         <span className="nav__name">Nine Superintelligence</span>
       </a>
       <nav className="nav__links" aria-label="Primary">
-        {ITEMS.map(([label, href], i) => (
+        {ITEMS.map(([label, href]) => (
           <a key={href} href={href} {...sfx('nav')}>
-            <span className="nav__index">0{i + 1}</span>
             {label}
           </a>
         ))}
